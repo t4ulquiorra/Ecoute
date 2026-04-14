@@ -765,7 +765,6 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
                         val urlResult = runBlocking(Dispatchers.IO) {
                             Innertube.player(PlayerBody(videoId = videoId))
                         }?.mapCatching { body ->
-                            }
 
                             when (val status = body.playabilityStatus?.status) {
                                 "OK" -> body.streamingData?.highestQualityFormat?.let { format ->

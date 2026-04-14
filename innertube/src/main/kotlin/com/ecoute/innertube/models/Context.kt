@@ -34,11 +34,11 @@ data class Context(
 
         val DefaultAndroid = Context(
             client = Client(
-                clientName = "ANDROID_VR",
-                clientVersion = "1.43.32",
+                clientName = "ANDROID_MUSIC",
+                clientVersion = "7.27.52",
                 platform = "MOBILE",
-                androidSdkVersion = 32,
-                userAgent = "com.google.android.apps.youtube.vr.oculus/1.43.32 (Linux; U; Android 12; en_US; Quest 3; Build/SQ3A.220605.009.A1; Cronet/107.0.5284.2) gzip"
+                androidSdkVersion = 30,
+                userAgent = "com.google.android.apps.youtube.googlemusic/7.27.52 (Linux; U; Android 11) gzip"
             )
         )
 
