@@ -41,6 +41,8 @@ object Innertube {
             url(scheme = "https", host ="music.youtube.com") {
                 headers.append(HttpHeaders.ContentType, ContentType.Application.Json.toString())
                 headers.append("X-Goog-Api-Key", "AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8")
+		headers.append(HttpHeaders.Origin, "https://music.youtube.com")
+		headers.append(HttpHeaders.Referrer, "https://music.youtube.com/")
                 parameters.append("prettyPrint", "false")
             }
         }
