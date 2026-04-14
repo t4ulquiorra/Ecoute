@@ -1,0 +1,11 @@
+package com.ecoute.innertube.models.bodies
+
+import com.ecoute.innertube.models.Context
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class QueueBody(
+    val context: Context = Context.DefaultWeb,
+    val videoIds: List<String>? = null,
+    val playlistId: String? = null,
+)
