@@ -27,18 +27,18 @@ data class Context(
         val DefaultWeb = Context(
             client = Client(
                 clientName = "WEB_REMIX",
-                clientVersion = "1.20220918",
+                clientVersion = "1.20260213.01.00",
                 platform = "DESKTOP",
             )
         )
 
         val DefaultAndroid = Context(
             client = Client(
-                clientName = "ANDROID_MUSIC",
-                clientVersion = "5.28.1",
+                clientName = "ANDROID_VR",
+                clientVersion = "1.43.32",
                 platform = "MOBILE",
-                androidSdkVersion = 30,
-                userAgent = "com.google.android.apps.youtube.music/5.28.1 (Linux; U; Android 11) gzip"
+                androidSdkVersion = 32,
+                userAgent = "com.google.android.apps.youtube.vr.oculus/1.43.32 (Linux; U; Android 12; en_US; Quest 3; Build/SQ3A.220605.009.A1; Cronet/107.0.5284.2) gzip"
             )
         )
 
