@@ -11,7 +11,7 @@ dependencyResolutionManagement {
 
     versionCatalogs {
         create("libs") {
-            version("kotlin", "1.7.20")
+            version("kotlin", "1.8.22")
             plugin("kotlin-serialization","org.jetbrains.kotlin.plugin.serialization").versionRef("kotlin")
 
             library("kotlin-coroutines","org.jetbrains.kotlinx", "kotlinx-coroutines-core").version("1.6.4")
