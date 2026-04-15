@@ -30,7 +30,6 @@ class PoTokenGenerator {
         } catch (e: Exception) {
             Timber.tag(TAG).e(e, "poToken generation exception: ${e.javaClass.simpleName}: ${e.message}")
             throw e
-            }
         }
     }
 
