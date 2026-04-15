@@ -49,7 +49,7 @@ dependencyResolutionManagement {
 
             library("palette", "androidx.palette", "palette").version("1.0.0")
 
-            library("desugaring", "com.android.tools", "desugar_jdk_libs").version("1.1.5")
+            library("desugaring", "com.android.tools", "desugar_jdk_libs").version("2.0.4")
 
             version("timber", "5.0.1")
             library("timber", "com.jakewharton.timber", "timber").versionRef("timber")
