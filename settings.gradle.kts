@@ -16,7 +16,7 @@ dependencyResolutionManagement {
 
             library("kotlin-coroutines","org.jetbrains.kotlinx", "kotlinx-coroutines-core").version("1.6.4")
 
-            version("compose-compiler", "1.3.2")
+            version("compose-compiler", "1.4.8")
 
             version("compose", "1.3.0-rc01")
             library("compose-foundation", "androidx.compose.foundation", "foundation").versionRef("compose")
