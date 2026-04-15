@@ -98,3 +98,9 @@ dependencies {
     implementation(libs.newpipeextractor)
     implementation(libs.okhttp)
 }
+
+configurations.all {
+    resolutionStrategy {
+        force("org.mozilla:rhino:1.7.15")
+    }
+}
