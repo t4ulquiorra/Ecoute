@@ -464,7 +464,6 @@ object YTPlayerUtils {
             return isSuccessful
         } catch (e: Exception) {
             Timber.tag(logTag).e(e, "Stream URL validation failed with exception")
-            reportException(e)
         }
         return false
     }
@@ -489,7 +488,6 @@ object YTPlayerUtils {
                     Timber.tag(TAG).i("Age-restricted detected early via NewPipe: videoId=$videoId")
                 } else {
                     Timber.tag(logTag).e(error, "Failed to get signature timestamp")
-                    reportException(error)
                 }
                 SignatureTimestampResult(null, isAgeRestricted)
             }
