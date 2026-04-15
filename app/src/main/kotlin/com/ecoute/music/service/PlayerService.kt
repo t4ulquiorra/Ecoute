@@ -117,6 +117,9 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 import kotlinx.coroutines.runBlocking
+import android.net.ConnectivityManager
+import com.ecoute.music.constants.AudioQuality
+import com.ecoute.music.utils.YTPlayerUtils
 
 @Suppress("DEPRECATION")
 class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListener.Callback,
@@ -762,58 +765,50 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
                     ringBuffer.getOrNull(0)?.first -> dataSpec.withUri(ringBuffer.getOrNull(0)!!.second)
                     ringBuffer.getOrNull(1)?.first -> dataSpec.withUri(ringBuffer.getOrNull(1)!!.second)
                     else -> {
+                        val connectivityManager = getSystemService(ConnectivityManager::class.java)
                         val urlResult = runBlocking(Dispatchers.IO) {
-                            Innertube.player(PlayerBody(videoId = videoId, context = com.ecoute.innertube.models.Context.DefaultAndroid))
-                        }?.mapCatching { body ->
+                            YTPlayerUtils.playerResponseForPlayback(
+                                videoId = videoId,
+                                playlistId = null,
+                                audioQuality = AudioQuality.AUTO,
+                                connectivityManager = connectivityManager
+                            )
+                        }.mapCatching { data ->
+                            val format = data.format
+                            val url = data.streamUrl
 
-                            when (val status = body.playabilityStatus?.status) {
-                                "OK" -> body.streamingData?.highestQualityFormat?.let { format ->
-                                    val mediaItem = runBlocking(Dispatchers.Main) {
-                                        player.findNextMediaItemById(videoId)
+                            val mediaItem = runBlocking(Dispatchers.Main) {
+                                player.findNextMediaItemById(videoId)
+                            }
+
+                            if (mediaItem?.mediaMetadata?.extras?.getString("durationText") == null) {
+                                format.approxDurationMs?.div(1000)
+                                    ?.let(DateUtils::formatElapsedTime)?.removePrefix("0")
+                                    ?.let { durationText ->
+                                        mediaItem?.mediaMetadata?.extras?.putString("durationText", durationText)
+                                        Database.updateDurationText(videoId, durationText)
                                     }
+                            }
 
-                                    if (mediaItem?.mediaMetadata?.extras?.getString("durationText") == null) {
-                                        format.approxDurationMs?.div(1000)
-                                            ?.let(DateUtils::formatElapsedTime)?.removePrefix("0")
-                                            ?.let { durationText ->
-                                                mediaItem?.mediaMetadata?.extras?.putString(
-                                                    "durationText",
-                                                    durationText
-                                                )
-                                                Database.updateDurationText(videoId, durationText)
-                                            }
-                                    }
-
-                                    query {
-                                        mediaItem?.let(Database::insert)
-
-                                        Database.insert(
-                                            com.ecoute.music.models.Format(
-                                                songId = videoId,
-                                                itag = format.itag,
-                                                mimeType = format.mimeType,
-                                                bitrate = format.bitrate,
-                                                loudnessDb = body.playerConfig?.audioConfig?.normalizedLoudnessDb,
-                                                contentLength = format.contentLength,
-                                                lastModified = format.lastModified
-                                            )
-                                        )
-                                    }
-
-                                    format.url
-                                } ?: throw PlayableFormatNotFoundException()
-
-                                "UNPLAYABLE" -> throw UnplayableException()
-                                "LOGIN_REQUIRED" -> throw LoginRequiredException()
-                                else -> throw PlaybackException(
-                                    status,
-                                    null,
-                                    PlaybackException.ERROR_CODE_REMOTE_ERROR
+                            query {
+                                mediaItem?.let(Database::insert)
+                                Database.insert(
+                                    com.ecoute.music.models.Format(
+                                        songId = videoId,
+                                        itag = format.itag,
+                                        mimeType = format.mimeType,
+                                        bitrate = format.bitrate,
+                                        loudnessDb = data.audioConfig?.normalizedLoudnessDb,
+                                        contentLength = format.contentLength,
+                                        lastModified = format.lastModified
+                                    )
                                 )
                             }
+
+                            url
                         }
 
-                        urlResult?.getOrThrow()?.let { url ->
+                        urlResult.getOrThrow().let { url ->
                             ringBuffer.append(videoId to url.toUri())
                             dataSpec.withUri(url.toUri())
                                 .subrange(dataSpec.uriPositionOffset, chunkLength)

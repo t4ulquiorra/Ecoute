@@ -50,6 +50,13 @@ dependencyResolutionManagement {
             library("palette", "androidx.palette", "palette").version("1.0.0")
 
             library("desugaring", "com.android.tools", "desugar_jdk_libs").version("1.1.5")
+
+            version("timber", "5.0.1")
+            library("timber", "com.jakewharton.timber", "timber").versionRef("timber")
+
+            library("newpipeextractor", "com.github.TeamNewPipe", "NewPipeExtractor").version("v0.26.0")
+
+            library("okhttp", "com.squareup.okhttp3", "okhttp").version("4.11.0")
         }
 
         create("testLibs") {

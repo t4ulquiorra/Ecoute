@@ -5,12 +5,12 @@ plugins {
 }
 
 android {
-    compileSdk = 33
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.ecoute.music"
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 36
         versionCode = 20
         versionName = "0.5.4"
     }
@@ -49,8 +49,8 @@ android {
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     composeOptions {
@@ -59,7 +59,7 @@ android {
 
     kotlinOptions {
         freeCompilerArgs += "-Xcontext-receivers"
-        jvmTarget = "1.8"
+        jvmTarget = "21"
     }
 }
 
@@ -93,4 +93,8 @@ dependencies {
     implementation(projects.kugou)
 
     coreLibraryDesugaring(libs.desugaring)
+
+    implementation(libs.timber)
+    implementation(libs.newpipeextractor)
+    implementation(libs.okhttp)
 }
