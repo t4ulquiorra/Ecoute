@@ -330,8 +330,8 @@ object YouTube {
                 AlbumPage.getSong(it, album)
             }!!
             .toMutableList()
-        var continuation = response.contents.twoColumnBrowseResultsRenderer.secondaryContents.sectionListRenderer
-            .contents.firstOrNull()?.musicPlaylistShelfRenderer?.contents?.getContinuation()
+        val sectionContents = response.contents?.twoColumnBrowseResultsRenderer?.secondaryContents?.sectionListRenderer?.contents
+        var continuation = sectionContents?.firstOrNull()?.musicPlaylistShelfRenderer?.contents?.getContinuation()
         val seenContinuations = mutableSetOf<String>()
         var requestCount = 0
         val maxRequests = 50 // Prevent excessive API calls
@@ -691,7 +691,8 @@ object YouTube {
                             // BOOKMARK: default=remove, toggled=add
                             PageHelper.LibraryFeedbackTokens(toggledToken, defaultToken)
                         }
-                        Timber.d("[PODCAST] Found toggle button with library tokens - add: ${libraryTokens.addToken != null}, remove: ${libraryTokens.removeToken != null}")
+                        val tokens = libraryTokens
+                        Timber.d("[PODCAST] Found toggle button with library tokens - add: ${tokens?.addToken != null}, remove: ${tokens?.removeToken != null}")
                     }
                 }
             }
@@ -1587,7 +1588,7 @@ object YouTube {
             uploadUrl!!,
             image
         )
-        val blobId = Json.decodeFromString<ImageUploadResponse>(blobReq.bodyAsText()).encryptedBlobId
+        val blobId = Json.decodeFromString(ImageUploadResponse.serializer(), blobReq.bodyAsText()).encryptedBlobId
         innerTube.setThumbnailPlaylist(WEB_REMIX, playlistId, blobId).body<EditPlaylistResponse>().newHeader?.musicEditablePlaylistDetailHeaderRenderer?.header?.musicResponsiveHeaderRenderer?.thumbnail?.musicThumbnailRenderer?.getThumbnailUrl()
     }
 
