@@ -5,12 +5,12 @@ plugins {
 }
 
 android {
-    compileSdk = 36
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.ecoute.music"
         minSdk = 26
-        targetSdk = 36
+        targetSdk = 34
         versionCode = 20
         versionName = "0.5.4"
     }
