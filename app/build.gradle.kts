@@ -6,7 +6,6 @@ plugins {
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.chaquo)
 }
 
 android {
@@ -169,16 +168,6 @@ composeCompiler {
     }
 }
 
-chaquopy {
-    defaultConfig {
-        version = "3.12"
-        pip {
-            install("yt-dlp>=2026.03.17")
-            install("yt-dlp-ejs")
-            install("pip")
-        }
-    }
-}
 
 dependencies {
     coreLibraryDesugaring(libs.desugaring)
