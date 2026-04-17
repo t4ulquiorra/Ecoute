@@ -81,7 +81,6 @@ import com.ecoute.music.utils.ConditionalCacheDataSourceFactory
 import com.ecoute.music.utils.GlyphInterface
 import com.ecoute.music.utils.InvincibleService
 import com.ecoute.music.utils.TimerJob
-import com.ecoute.music.utils.YouTubeDLResponse
 import com.ecoute.music.utils.YouTubeRadio
 import com.ecoute.music.utils.activityPendingIntent
 import com.ecoute.music.utils.asDataSource
@@ -1373,16 +1372,7 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
                 }?.getOrNull()
                 val youtubeFormat = body?.streamingData?.highestQualityFormat
 
-                val info = runCatching {
-                    Dependencies.runDownload(mediaId)
-                }.mapCatching {
-                    YouTubeDLResponse.fromString(it)
-                }.also { it.exceptionOrNull()?.printStackTrace() }.getOrNull()
-                if (info?.id != mediaId) throw VideoIdMismatchException()
-                val format = info.formats?.firstOrNull { it.formatId == info.formatId }
-
-                val uri =
-                    runCatching { info.url?.toUri() }.getOrNull() ?: throw UnplayableException()
+                val uri = youtubeFormat?.url?.toUri() ?: throw UnplayableException()
 
                 val mediaItem = runCatching {
                     runBlocking(Dispatchers.IO) { findMediaItem(mediaId) }
@@ -1407,11 +1397,11 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
                         Database.insert(
                             Format(
                                 songId = mediaId,
-                                itag = info.formatId?.toIntOrNull(),
+                                itag = youtubeFormat?.itag,
                                 mimeType = youtubeFormat?.mimeType,
-                                bitrate = format?.abr?.let { it * 1000 }?.toLong(),
+                                bitrate = youtubeFormat?.bitrate,
                                 loudnessDb = body?.playerConfig?.audioConfig?.normalizedLoudnessDb,
-                                contentLength = info.fileSize,
+                                contentLength = youtubeFormat?.contentLength,
                                 lastModified = youtubeFormat?.lastModified
                             )
                         )
@@ -1420,13 +1410,13 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
 
                 uriCache.push(
                     key = mediaId,
-                    meta = info.fileSize,
+                    meta = youtubeFormat?.contentLength,
                     uri = uri
                 )
 
                 dataSpec
                     .withUri(uri)
-                    .ranged(info.fileSize)
+                    .ranged(youtubeFormat?.contentLength)
             }
         }.handleUnknownErrors {
             uriCache.clear()
