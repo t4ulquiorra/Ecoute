@@ -10,7 +10,9 @@ data class Thumbnail(
 ) {
     fun size(size: Int) = when {
         url.startsWith("https://lh3.googleusercontent.com") -> "$url-w$size-h$size"
-        url.startsWith("https://yt3.ggpht.com") -> "$url-s$size"
+        url.startsWith("https://yt3.ggpht.com") -> "$url-w$size-h$size-s$size"
+        url.startsWith("https://yt3.googleusercontent.com") -> "$url-w$size-h$size-s$size"
+        url.contains("ytimg.com") -> url.replace(Regex("=w\d+-h\d+"), "=w$size-h$size")
         else -> url
     }
 }
