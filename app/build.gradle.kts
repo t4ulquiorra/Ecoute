@@ -171,7 +171,7 @@ composeCompiler {
 
 chaquopy {
     defaultConfig {
-        version = "3.14"
+        version = "3.12"
         pip {
             install("yt-dlp>=2026.03.17")
             install("yt-dlp-ejs")
