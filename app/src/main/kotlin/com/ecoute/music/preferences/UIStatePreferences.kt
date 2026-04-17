@@ -1,11 +1,11 @@
-package com.ecoute.android.preferences
+package com.ecoute.music.preferences
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.SnapshotMutationPolicy
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import com.ecoute.android.GlobalPreferencesHolder
+import com.ecoute.music.GlobalPreferencesHolder
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList

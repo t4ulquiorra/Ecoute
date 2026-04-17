@@ -1,6 +1,6 @@
 @file:OptIn(UnstableApi::class)
 
-package com.ecoute.android.utils
+package com.ecoute.music.utils
 
 import android.content.Context
 import android.util.Log

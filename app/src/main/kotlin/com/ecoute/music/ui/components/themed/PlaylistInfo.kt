@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.components.themed
+package com.ecoute.music.ui.components.themed
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -8,8 +8,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.ecoute.android.models.Album
-import com.ecoute.android.utils.semiBold
+import com.ecoute.music.models.Album
+import com.ecoute.music.utils.semiBold
 import com.ecoute.core.ui.LocalAppearance
 import com.ecoute.providers.innertube.Innertube
 

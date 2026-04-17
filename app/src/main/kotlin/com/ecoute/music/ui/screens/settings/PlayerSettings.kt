@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.screens.settings
+package com.ecoute.music.ui.screens.settings
 
 import androidx.annotation.OptIn
 import androidx.compose.animation.AnimatedVisibility
@@ -18,13 +18,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.media3.common.util.UnstableApi
-import com.ecoute.android.LocalPlayerServiceBinder
-import com.ecoute.android.R
-import com.ecoute.android.preferences.PlayerPreferences
-import com.ecoute.android.service.PlayerService
-import com.ecoute.android.ui.components.themed.SecondaryTextButton
-import com.ecoute.android.ui.screens.Route
-import com.ecoute.android.utils.rememberEqualizerLauncher
+import com.ecoute.music.LocalPlayerServiceBinder
+import com.ecoute.music.R
+import com.ecoute.music.preferences.PlayerPreferences
+import com.ecoute.music.service.PlayerService
+import com.ecoute.music.ui.components.themed.SecondaryTextButton
+import com.ecoute.music.ui.screens.Route
+import com.ecoute.music.utils.rememberEqualizerLauncher
 import com.ecoute.core.ui.utils.isAtLeastAndroid6
 
 @OptIn(UnstableApi::class)

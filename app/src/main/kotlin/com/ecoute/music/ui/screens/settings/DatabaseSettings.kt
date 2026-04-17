@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.screens.settings
+package com.ecoute.music.ui.screens.settings
 
 import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
@@ -12,16 +12,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
-import com.ecoute.android.Database
-import com.ecoute.android.R
-import com.ecoute.android.internal
-import com.ecoute.android.preferences.DataPreferences
-import com.ecoute.android.query
-import com.ecoute.android.service.PlayerService
-import com.ecoute.android.transaction
-import com.ecoute.android.ui.screens.Route
-import com.ecoute.android.utils.intent
-import com.ecoute.android.utils.toast
+import com.ecoute.music.Database
+import com.ecoute.music.R
+import com.ecoute.music.internal
+import com.ecoute.music.preferences.DataPreferences
+import com.ecoute.music.query
+import com.ecoute.music.service.PlayerService
+import com.ecoute.music.transaction
+import com.ecoute.music.ui.screens.Route
+import com.ecoute.music.utils.intent
+import com.ecoute.music.utils.toast
 import kotlinx.coroutines.flow.distinctUntilChanged
 import java.io.FileInputStream
 import java.io.FileOutputStream

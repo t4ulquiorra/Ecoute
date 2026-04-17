@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalTime::class)
 
-package com.ecoute.android.ui.screens.settings
+package com.ecoute.music.ui.screens.settings
 
 import android.content.Intent
 import androidx.compose.animation.AnimatedContent
@@ -43,17 +43,17 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.ecoute.android.LocalPlayerAwareWindowInsets
-import com.ecoute.android.R
-import com.ecoute.android.ui.components.themed.FloatingActionsContainerWithScrollToTop
-import com.ecoute.android.ui.components.themed.Scaffold
-import com.ecoute.android.ui.screens.GlobalRoutes
-import com.ecoute.android.ui.screens.Route
-import com.ecoute.android.utils.Logcat
-import com.ecoute.android.utils.color
-import com.ecoute.android.utils.logcat
-import com.ecoute.android.utils.semiBold
-import com.ecoute.android.utils.smoothScrollToTop
+import com.ecoute.music.LocalPlayerAwareWindowInsets
+import com.ecoute.music.R
+import com.ecoute.music.ui.components.themed.FloatingActionsContainerWithScrollToTop
+import com.ecoute.music.ui.components.themed.Scaffold
+import com.ecoute.music.ui.screens.GlobalRoutes
+import com.ecoute.music.ui.screens.Route
+import com.ecoute.music.utils.Logcat
+import com.ecoute.music.utils.color
+import com.ecoute.music.utils.logcat
+import com.ecoute.music.utils.semiBold
+import com.ecoute.music.utils.smoothScrollToTop
 import com.ecoute.compose.routing.RouteHandler
 import com.ecoute.core.ui.LocalAppearance
 import com.ecoute.core.ui.surface

@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.screens.settings
+package com.ecoute.music.ui.screens.settings
 
 import android.text.format.Formatter
 import androidx.annotation.OptIn
@@ -17,13 +17,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.media3.common.util.UnstableApi
-import com.ecoute.android.LocalPlayerServiceBinder
-import com.ecoute.android.R
-import com.ecoute.android.preferences.DataPreferences
-import com.ecoute.android.preferences.PlayerPreferences
-import com.ecoute.android.ui.components.themed.LinearProgressIndicator
-import com.ecoute.android.ui.components.themed.SecondaryTextButton
-import com.ecoute.android.ui.screens.Route
+import com.ecoute.music.LocalPlayerServiceBinder
+import com.ecoute.music.R
+import com.ecoute.music.preferences.DataPreferences
+import com.ecoute.music.preferences.PlayerPreferences
+import com.ecoute.music.ui.components.themed.LinearProgressIndicator
+import com.ecoute.music.ui.components.themed.SecondaryTextButton
+import com.ecoute.music.ui.screens.Route
 import com.ecoute.core.data.enums.ExoPlayerDiskCacheSize
 import coil3.imageLoader
 

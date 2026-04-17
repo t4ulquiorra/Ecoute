@@ -1,4 +1,4 @@
-package com.ecoute.android.models
+package com.ecoute.music.models
 
 import android.os.Parcelable
 import androidx.compose.ui.graphics.Color

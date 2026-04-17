@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.screens.home
+package com.ecoute.music.ui.screens.home
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -23,16 +23,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.ecoute.android.Database
-import com.ecoute.android.LocalPlayerAwareWindowInsets
-import com.ecoute.android.R
-import com.ecoute.android.models.Album
-import com.ecoute.android.preferences.OrderPreferences
-import com.ecoute.android.ui.components.themed.FloatingActionsContainerWithScrollToTop
-import com.ecoute.android.ui.components.themed.Header
-import com.ecoute.android.ui.components.themed.HeaderIconButton
-import com.ecoute.android.ui.items.AlbumItem
-import com.ecoute.android.ui.screens.Route
+import com.ecoute.music.Database
+import com.ecoute.music.LocalPlayerAwareWindowInsets
+import com.ecoute.music.R
+import com.ecoute.music.models.Album
+import com.ecoute.music.preferences.OrderPreferences
+import com.ecoute.music.ui.components.themed.FloatingActionsContainerWithScrollToTop
+import com.ecoute.music.ui.components.themed.Header
+import com.ecoute.music.ui.components.themed.HeaderIconButton
+import com.ecoute.music.ui.items.AlbumItem
+import com.ecoute.music.ui.screens.Route
 import com.ecoute.compose.persist.persist
 import com.ecoute.core.data.enums.AlbumSortBy
 import com.ecoute.core.data.enums.SortOrder

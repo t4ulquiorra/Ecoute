@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.screens.settings
+package com.ecoute.music.ui.screens.settings
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
@@ -11,13 +11,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.ecoute.android.R
-import com.ecoute.android.preferences.AppearancePreferences
-import com.ecoute.android.preferences.PlayerPreferences
-import com.ecoute.android.ui.screens.Route
-import com.ecoute.android.utils.currentLocale
-import com.ecoute.android.utils.findActivity
-import com.ecoute.android.utils.startLanguagePicker
+import com.ecoute.music.R
+import com.ecoute.music.preferences.AppearancePreferences
+import com.ecoute.music.preferences.PlayerPreferences
+import com.ecoute.music.ui.screens.Route
+import com.ecoute.music.utils.currentLocale
+import com.ecoute.music.utils.findActivity
+import com.ecoute.music.utils.startLanguagePicker
 import com.ecoute.core.ui.BuiltInFontFamily
 import com.ecoute.core.ui.ColorMode
 import com.ecoute.core.ui.ColorSource

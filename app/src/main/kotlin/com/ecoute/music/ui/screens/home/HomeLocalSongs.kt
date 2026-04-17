@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.screens.home
+package com.ecoute.music.ui.screens.home
 
 import android.Manifest
 import android.content.Context
@@ -26,17 +26,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.ecoute.android.Database
-import com.ecoute.android.R
-import com.ecoute.android.models.Song
-import com.ecoute.android.preferences.OrderPreferences
-import com.ecoute.android.service.LOCAL_KEY_PREFIX
-import com.ecoute.android.transaction
-import com.ecoute.android.ui.components.themed.SecondaryTextButton
-import com.ecoute.android.ui.screens.Route
-import com.ecoute.android.utils.AudioMediaCursor
-import com.ecoute.android.utils.hasPermission
-import com.ecoute.android.utils.medium
+import com.ecoute.music.Database
+import com.ecoute.music.R
+import com.ecoute.music.models.Song
+import com.ecoute.music.preferences.OrderPreferences
+import com.ecoute.music.service.LOCAL_KEY_PREFIX
+import com.ecoute.music.transaction
+import com.ecoute.music.ui.components.themed.SecondaryTextButton
+import com.ecoute.music.ui.screens.Route
+import com.ecoute.music.utils.AudioMediaCursor
+import com.ecoute.music.utils.hasPermission
+import com.ecoute.music.utils.medium
 import com.ecoute.core.ui.LocalAppearance
 import com.ecoute.core.ui.utils.isAtLeastAndroid13
 import com.ecoute.core.ui.utils.isCompositionLaunched

@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.components.themed
+package com.ecoute.music.ui.components.themed
 
 import androidx.annotation.IntRange
 import androidx.compose.foundation.Canvas
@@ -42,11 +42,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.ecoute.android.R
-import com.ecoute.android.utils.center
-import com.ecoute.android.utils.drawCircle
-import com.ecoute.android.utils.medium
-import com.ecoute.android.utils.semiBold
+import com.ecoute.music.R
+import com.ecoute.music.utils.center
+import com.ecoute.music.utils.drawCircle
+import com.ecoute.music.utils.medium
+import com.ecoute.music.utils.semiBold
 import com.ecoute.core.ui.LocalAppearance
 import com.ecoute.core.ui.utils.roundedShape
 import kotlinx.collections.immutable.ImmutableList

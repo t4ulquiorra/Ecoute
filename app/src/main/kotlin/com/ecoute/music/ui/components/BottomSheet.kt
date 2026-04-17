@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.components
+package com.ecoute.music.ui.components
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.AnimationSpec

@@ -1,4 +1,4 @@
-package com.ecoute.android.utils
+package com.ecoute.music.utils
 
 import androidx.media3.common.MediaItem
 import com.ecoute.providers.innertube.Innertube

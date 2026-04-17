@@ -1,4 +1,4 @@
-package com.ecoute.android.utils
+package com.ecoute.music.utils
 
 import android.app.Activity
 import android.app.PictureInPictureParams
@@ -34,8 +34,8 @@ import androidx.core.app.OnPictureInPictureModeChangedProvider
 import androidx.core.app.PictureInPictureModeChangedInfo
 import androidx.core.graphics.toRect
 import androidx.core.util.Consumer
-import com.ecoute.android.R
-import com.ecoute.android.preferences.AppearancePreferences
+import com.ecoute.music.R
+import com.ecoute.music.preferences.AppearancePreferences
 import com.ecoute.compose.persist.findActivityNullable
 import com.ecoute.core.ui.utils.isAtLeastAndroid12
 import com.ecoute.core.ui.utils.isAtLeastAndroid7

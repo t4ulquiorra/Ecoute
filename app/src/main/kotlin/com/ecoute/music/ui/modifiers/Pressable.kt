@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.modifiers
+package com.ecoute.music.ui.modifiers
 
 import androidx.compose.foundation.Indication
 import androidx.compose.foundation.clickable

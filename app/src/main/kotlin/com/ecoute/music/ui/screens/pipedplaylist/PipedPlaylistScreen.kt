@@ -1,14 +1,14 @@
-package com.ecoute.android.ui.screens.pipedplaylist
+package com.ecoute.music.ui.screens.pipedplaylist
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
-import com.ecoute.android.R
-import com.ecoute.android.ui.components.themed.Scaffold
-import com.ecoute.android.ui.screens.GlobalRoutes
-import com.ecoute.android.ui.screens.Route
+import com.ecoute.music.R
+import com.ecoute.music.ui.components.themed.Scaffold
+import com.ecoute.music.ui.screens.GlobalRoutes
+import com.ecoute.music.ui.screens.Route
 import com.ecoute.compose.persist.PersistMapCleanup
 import com.ecoute.compose.routing.RouteHandler
 import com.ecoute.providers.piped.models.authenticatedWith

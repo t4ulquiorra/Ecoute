@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.screens.searchresult
+package com.ecoute.music.ui.screens.searchresult
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -22,12 +22,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.ecoute.android.LocalPlayerAwareWindowInsets
-import com.ecoute.android.R
-import com.ecoute.android.ui.components.ShimmerHost
-import com.ecoute.android.ui.components.themed.FloatingActionsContainerWithScrollToTop
-import com.ecoute.android.utils.center
-import com.ecoute.android.utils.secondary
+import com.ecoute.music.LocalPlayerAwareWindowInsets
+import com.ecoute.music.R
+import com.ecoute.music.ui.components.ShimmerHost
+import com.ecoute.music.ui.components.themed.FloatingActionsContainerWithScrollToTop
+import com.ecoute.music.utils.center
+import com.ecoute.music.utils.secondary
 import com.ecoute.compose.persist.persist
 import com.ecoute.core.ui.LocalAppearance
 import com.ecoute.providers.innertube.Innertube

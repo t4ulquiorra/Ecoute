@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.components.themed
+package com.ecoute.music.ui.components.themed
 
 import android.os.Parcelable
 import androidx.annotation.DrawableRes
@@ -50,12 +50,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEachIndexed
-import com.ecoute.android.LocalPlayerAwareWindowInsets
-import com.ecoute.android.R
-import com.ecoute.android.ui.screens.settings.SwitchSettingsEntry
-import com.ecoute.android.utils.center
-import com.ecoute.android.utils.color
-import com.ecoute.android.utils.semiBold
+import com.ecoute.music.LocalPlayerAwareWindowInsets
+import com.ecoute.music.R
+import com.ecoute.music.ui.screens.settings.SwitchSettingsEntry
+import com.ecoute.music.utils.center
+import com.ecoute.music.utils.color
+import com.ecoute.music.utils.semiBold
 import com.ecoute.core.ui.Dimensions
 import com.ecoute.core.ui.LocalAppearance
 import com.ecoute.core.ui.utils.isLandscape

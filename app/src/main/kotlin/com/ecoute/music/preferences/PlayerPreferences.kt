@@ -1,10 +1,10 @@
-package com.ecoute.android.preferences
+package com.ecoute.music.preferences
 
 import android.media.audiofx.PresetReverb
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import com.ecoute.android.GlobalPreferencesHolder
-import com.ecoute.android.R
+import com.ecoute.music.GlobalPreferencesHolder
+import com.ecoute.music.R
 
 object PlayerPreferences : GlobalPreferencesHolder() {
     val isInvincibilityEnabledProperty = boolean(false)

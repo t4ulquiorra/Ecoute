@@ -1,6 +1,6 @@
 @file:OptIn(UnstableApi::class)
 
-package com.ecoute.android.utils
+package com.ecoute.music.utils
 
 import android.content.ContentUris
 import android.net.Uri
@@ -13,11 +13,11 @@ import androidx.core.net.toUri
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.util.UnstableApi
-import com.ecoute.android.R
-import com.ecoute.android.models.Song
-import com.ecoute.android.preferences.AppearancePreferences
-import com.ecoute.android.service.LOCAL_KEY_PREFIX
-import com.ecoute.android.service.isLocal
+import com.ecoute.music.R
+import com.ecoute.music.models.Song
+import com.ecoute.music.preferences.AppearancePreferences
+import com.ecoute.music.service.LOCAL_KEY_PREFIX
+import com.ecoute.music.service.isLocal
 import com.ecoute.core.ui.utils.SongBundleAccessor
 import com.ecoute.providers.innertube.Innertube
 import com.ecoute.providers.innertube.models.bodies.ContinuationBody

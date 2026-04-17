@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.items
+package com.ecoute.music.ui.items
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

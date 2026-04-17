@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.components
+package com.ecoute.music.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -29,8 +29,8 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.times
-import com.ecoute.android.LocalPlayerAwareWindowInsets
-import com.ecoute.android.ui.modifiers.pressable
+import com.ecoute.music.LocalPlayerAwareWindowInsets
+import com.ecoute.music.ui.modifiers.pressable
 
 val LocalMenuState = staticCompositionLocalOf { MenuState() }
 

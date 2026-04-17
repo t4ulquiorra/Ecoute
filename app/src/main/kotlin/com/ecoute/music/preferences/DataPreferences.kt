@@ -1,9 +1,9 @@
-package com.ecoute.android.preferences
+package com.ecoute.music.preferences
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import com.ecoute.android.GlobalPreferencesHolder
-import com.ecoute.android.R
+import com.ecoute.music.GlobalPreferencesHolder
+import com.ecoute.music.R
 import com.ecoute.core.data.enums.CoilDiskCacheSize
 import com.ecoute.core.data.enums.ExoPlayerDiskCacheSize
 import com.ecoute.providers.innertube.Innertube

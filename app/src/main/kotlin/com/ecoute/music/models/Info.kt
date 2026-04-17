@@ -1,4 +1,4 @@
-package com.ecoute.android.models
+package com.ecoute.music.models
 
 data class Info(
     val id: String,

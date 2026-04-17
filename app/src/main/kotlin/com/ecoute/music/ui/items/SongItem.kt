@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.items
+package com.ecoute.music.ui.items
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.Image
@@ -26,14 +26,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.media3.common.MediaItem
-import com.ecoute.android.R
-import com.ecoute.android.models.Song
-import com.ecoute.android.preferences.AppearancePreferences
-import com.ecoute.android.ui.components.themed.TextPlaceholder
-import com.ecoute.android.utils.medium
-import com.ecoute.android.utils.secondary
-import com.ecoute.android.utils.semiBold
-import com.ecoute.android.utils.thumbnail
+import com.ecoute.music.R
+import com.ecoute.music.models.Song
+import com.ecoute.music.preferences.AppearancePreferences
+import com.ecoute.music.ui.components.themed.TextPlaceholder
+import com.ecoute.music.utils.medium
+import com.ecoute.music.utils.secondary
+import com.ecoute.music.utils.semiBold
+import com.ecoute.music.utils.thumbnail
 import com.ecoute.core.ui.LocalAppearance
 import com.ecoute.core.ui.shimmer
 import com.ecoute.core.ui.utils.px

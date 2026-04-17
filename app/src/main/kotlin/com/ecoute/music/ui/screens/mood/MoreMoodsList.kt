@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.screens.mood
+package com.ecoute.music.ui.screens.mood
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -22,14 +22,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEachIndexed
-import com.ecoute.android.LocalPlayerAwareWindowInsets
-import com.ecoute.android.R
-import com.ecoute.android.ui.components.ShimmerHost
-import com.ecoute.android.ui.components.themed.Header
-import com.ecoute.android.ui.components.themed.HeaderPlaceholder
-import com.ecoute.android.ui.items.SongItemPlaceholder
-import com.ecoute.android.ui.screens.home.MoodItem
-import com.ecoute.android.utils.semiBold
+import com.ecoute.music.LocalPlayerAwareWindowInsets
+import com.ecoute.music.R
+import com.ecoute.music.ui.components.ShimmerHost
+import com.ecoute.music.ui.components.themed.Header
+import com.ecoute.music.ui.components.themed.HeaderPlaceholder
+import com.ecoute.music.ui.items.SongItemPlaceholder
+import com.ecoute.music.ui.screens.home.MoodItem
+import com.ecoute.music.utils.semiBold
 import com.ecoute.compose.persist.persist
 import com.ecoute.core.ui.Dimensions
 import com.ecoute.core.ui.LocalAppearance

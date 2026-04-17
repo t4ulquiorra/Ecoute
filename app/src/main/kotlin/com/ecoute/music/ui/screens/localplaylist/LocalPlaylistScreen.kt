@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.screens.localplaylist
+package com.ecoute.music.ui.screens.localplaylist
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -6,14 +6,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.runtime.setValue
-import com.ecoute.android.Database
-import com.ecoute.android.R
-import com.ecoute.android.models.Playlist
-import com.ecoute.android.models.Song
-import com.ecoute.android.ui.components.themed.Scaffold
-import com.ecoute.android.ui.components.themed.adaptiveThumbnailContent
-import com.ecoute.android.ui.screens.GlobalRoutes
-import com.ecoute.android.ui.screens.Route
+import com.ecoute.music.Database
+import com.ecoute.music.R
+import com.ecoute.music.models.Playlist
+import com.ecoute.music.models.Song
+import com.ecoute.music.ui.components.themed.Scaffold
+import com.ecoute.music.ui.components.themed.adaptiveThumbnailContent
+import com.ecoute.music.ui.screens.GlobalRoutes
+import com.ecoute.music.ui.screens.Route
 import com.ecoute.compose.persist.PersistMapCleanup
 import com.ecoute.compose.persist.persist
 import com.ecoute.compose.persist.persistList

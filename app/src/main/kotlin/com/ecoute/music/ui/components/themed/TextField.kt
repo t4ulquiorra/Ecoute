@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.components.themed
+package com.ecoute.music.ui.components.themed
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -20,8 +20,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
-import com.ecoute.android.utils.secondary
-import com.ecoute.android.utils.semiBold
+import com.ecoute.music.utils.secondary
+import com.ecoute.music.utils.semiBold
 import com.ecoute.core.ui.Appearance
 import com.ecoute.core.ui.LocalAppearance
 

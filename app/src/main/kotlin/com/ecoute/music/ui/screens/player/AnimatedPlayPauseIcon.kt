@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.screens.player
+package com.ecoute.music.ui.screens.player
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
-import com.ecoute.android.R
+import com.ecoute.music.R
 import com.ecoute.core.ui.LocalAppearance
 import com.airbnb.lottie.LottieComposition
 import com.airbnb.lottie.LottieProperty

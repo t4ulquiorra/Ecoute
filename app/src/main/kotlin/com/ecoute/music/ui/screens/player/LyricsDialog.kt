@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.screens.player
+package com.ecoute.music.ui.screens.player
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedContentTransitionScope
@@ -21,17 +21,17 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.ecoute.android.Database
-import com.ecoute.android.LocalPlayerServiceBinder
-import com.ecoute.android.preferences.PlayerPreferences
-import com.ecoute.android.ui.modifiers.PinchDirection
-import com.ecoute.android.ui.modifiers.onSwipe
-import com.ecoute.android.ui.modifiers.pinchToToggle
-import com.ecoute.android.utils.FullScreenState
-import com.ecoute.android.utils.forceSeekToNext
-import com.ecoute.android.utils.forceSeekToPrevious
-import com.ecoute.android.utils.thumbnail
-import com.ecoute.android.utils.windowState
+import com.ecoute.music.Database
+import com.ecoute.music.LocalPlayerServiceBinder
+import com.ecoute.music.preferences.PlayerPreferences
+import com.ecoute.music.ui.modifiers.PinchDirection
+import com.ecoute.music.ui.modifiers.onSwipe
+import com.ecoute.music.ui.modifiers.pinchToToggle
+import com.ecoute.music.utils.FullScreenState
+import com.ecoute.music.utils.forceSeekToNext
+import com.ecoute.music.utils.forceSeekToPrevious
+import com.ecoute.music.utils.thumbnail
+import com.ecoute.music.utils.windowState
 import com.ecoute.core.ui.LocalAppearance
 import com.ecoute.core.ui.utils.px
 import coil3.compose.AsyncImage

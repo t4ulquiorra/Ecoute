@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.components.themed
+package com.ecoute.music.ui.components.themed
 
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.animateDp
@@ -14,7 +14,7 @@ import androidx.compose.ui.geometry.center
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.unit.dp
-import com.ecoute.android.utils.drawCircle
+import com.ecoute.music.utils.drawCircle
 import com.ecoute.core.ui.LocalAppearance
 
 @Composable

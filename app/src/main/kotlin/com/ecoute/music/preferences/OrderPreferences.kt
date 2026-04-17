@@ -1,6 +1,6 @@
-package com.ecoute.android.preferences
+package com.ecoute.music.preferences
 
-import com.ecoute.android.GlobalPreferencesHolder
+import com.ecoute.music.GlobalPreferencesHolder
 import com.ecoute.core.data.enums.AlbumSortBy
 import com.ecoute.core.data.enums.ArtistSortBy
 import com.ecoute.core.data.enums.PlaylistSortBy

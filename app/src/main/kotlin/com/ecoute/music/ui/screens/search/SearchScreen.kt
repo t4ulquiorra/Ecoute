@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.screens.search
+package com.ecoute.music.ui.screens.search
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -16,11 +16,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
-import com.ecoute.android.R
-import com.ecoute.android.ui.components.themed.Scaffold
-import com.ecoute.android.ui.screens.GlobalRoutes
-import com.ecoute.android.ui.screens.Route
-import com.ecoute.android.utils.secondary
+import com.ecoute.music.R
+import com.ecoute.music.ui.components.themed.Scaffold
+import com.ecoute.music.ui.screens.GlobalRoutes
+import com.ecoute.music.ui.screens.Route
+import com.ecoute.music.utils.secondary
 import com.ecoute.compose.persist.PersistMapCleanup
 import com.ecoute.compose.routing.RouteHandler
 import com.ecoute.core.ui.LocalAppearance

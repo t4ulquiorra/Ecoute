@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.screens.player
+package com.ecoute.music.ui.screens.player
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
@@ -23,10 +23,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.ecoute.android.utils.center
-import com.ecoute.android.utils.color
-import com.ecoute.android.utils.isInPip
-import com.ecoute.android.utils.medium
+import com.ecoute.music.utils.center
+import com.ecoute.music.utils.color
+import com.ecoute.music.utils.isInPip
+import com.ecoute.music.utils.medium
 import com.ecoute.core.ui.LocalAppearance
 import com.ecoute.core.ui.onOverlay
 import com.ecoute.core.ui.overlay

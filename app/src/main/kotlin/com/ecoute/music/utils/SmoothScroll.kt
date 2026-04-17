@@ -1,4 +1,4 @@
-package com.ecoute.android.utils
+package com.ecoute.music.utils
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.lazy.LazyListState

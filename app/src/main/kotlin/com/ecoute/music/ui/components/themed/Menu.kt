@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.components.themed
+package com.ecoute.music.ui.components.themed
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -26,8 +26,8 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.ecoute.android.utils.medium
-import com.ecoute.android.utils.secondary
+import com.ecoute.music.utils.medium
+import com.ecoute.music.utils.secondary
 import com.ecoute.core.ui.LocalAppearance
 
 @Composable

@@ -1,6 +1,6 @@
 @file:OptIn(UnstableApi::class)
 
-package com.ecoute.android.utils
+package com.ecoute.music.utils
 
 import androidx.annotation.OptIn
 import androidx.media3.common.util.UnstableApi

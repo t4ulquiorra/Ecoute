@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalTime::class)
 
-package com.ecoute.android.utils
+package com.ecoute.music.utils
 
 import android.os.Parcel
 import android.os.Parcelable

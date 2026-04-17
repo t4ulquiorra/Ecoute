@@ -1,8 +1,8 @@
-package com.ecoute.android.preferences
+package com.ecoute.music.preferences
 
-import com.ecoute.android.GlobalPreferencesHolder
-import com.ecoute.android.preferences.OldPreferences.ColorPaletteMode
-import com.ecoute.android.preferences.OldPreferences.ColorPaletteName
+import com.ecoute.music.GlobalPreferencesHolder
+import com.ecoute.music.preferences.OldPreferences.ColorPaletteMode
+import com.ecoute.music.preferences.OldPreferences.ColorPaletteName
 import com.ecoute.core.ui.BuiltInFontFamily
 import com.ecoute.core.ui.ColorMode
 import com.ecoute.core.ui.ColorSource

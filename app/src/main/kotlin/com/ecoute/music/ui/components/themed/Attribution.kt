@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.components.themed
+package com.ecoute.music.ui.components.themed
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.clickable
@@ -21,12 +21,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.ecoute.android.LocalPlayerAwareWindowInsets
-import com.ecoute.android.R
-import com.ecoute.android.utils.align
-import com.ecoute.android.utils.disabled
-import com.ecoute.android.utils.secondary
-import com.ecoute.android.utils.semiBold
+import com.ecoute.music.LocalPlayerAwareWindowInsets
+import com.ecoute.music.R
+import com.ecoute.music.utils.align
+import com.ecoute.music.utils.disabled
+import com.ecoute.music.utils.secondary
+import com.ecoute.music.utils.semiBold
 import com.ecoute.core.ui.LocalAppearance
 
 @Composable

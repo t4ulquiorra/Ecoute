@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.components
+package com.ecoute.music.ui.components
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.horizontalScroll
@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.ecoute.android.ui.modifiers.horizontalFadingEdge
+import com.ecoute.music.ui.modifiers.horizontalFadingEdge
 
 @Composable
 inline fun FadingRow(

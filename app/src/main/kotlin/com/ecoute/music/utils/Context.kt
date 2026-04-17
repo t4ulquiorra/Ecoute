@@ -1,4 +1,4 @@
-package com.ecoute.android.utils
+package com.ecoute.music.utils
 
 import android.app.Activity
 import android.app.PendingIntent
@@ -20,7 +20,7 @@ import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.offline.DownloadRequest
 import androidx.media3.exoplayer.offline.DownloadService
 import androidx.media3.exoplayer.offline.DownloadService.sendAddDownload
-import com.ecoute.android.BuildConfig
+import com.ecoute.music.BuildConfig
 import com.ecoute.core.ui.utils.isAtLeastAndroid11
 import com.ecoute.core.ui.utils.isAtLeastAndroid6
 

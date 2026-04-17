@@ -1,4 +1,4 @@
-package com.ecoute.android.utils
+package com.ecoute.music.utils
 
 import android.graphics.Bitmap
 import androidx.compose.runtime.Composable
@@ -7,7 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import com.ecoute.android.service.PlayerService
+import com.ecoute.music.service.PlayerService
 
 @Composable
 fun PlayerService.Binder?.collectProvidedBitmapAsState(

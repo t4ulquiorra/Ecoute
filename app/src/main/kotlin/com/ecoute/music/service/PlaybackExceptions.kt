@@ -1,6 +1,6 @@
 @file:OptIn(UnstableApi::class)
 
-package com.ecoute.android.service
+package com.ecoute.music.service
 
 import androidx.annotation.OptIn
 import androidx.media3.common.PlaybackException

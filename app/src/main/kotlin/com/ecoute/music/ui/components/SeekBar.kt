@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.components
+package com.ecoute.music.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.LinearEasing
@@ -52,11 +52,11 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.media3.common.C
-import com.ecoute.android.models.ui.UiMedia
-import com.ecoute.android.preferences.PlayerPreferences
-import com.ecoute.android.service.PlayerService
-import com.ecoute.android.utils.formatAsDuration
-import com.ecoute.android.utils.semiBold
+import com.ecoute.music.models.ui.UiMedia
+import com.ecoute.music.preferences.PlayerPreferences
+import com.ecoute.music.service.PlayerService
+import com.ecoute.music.utils.formatAsDuration
+import com.ecoute.music.utils.semiBold
 import com.ecoute.core.ui.LocalAppearance
 import com.ecoute.core.ui.utils.roundedShape
 import kotlin.math.PI

@@ -1,4 +1,4 @@
-package com.ecoute.android.utils
+package com.ecoute.music.utils
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect

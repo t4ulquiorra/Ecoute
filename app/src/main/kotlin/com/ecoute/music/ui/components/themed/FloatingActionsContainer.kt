@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.components.themed
+package com.ecoute.music.ui.components.themed
 
 import androidx.annotation.DrawableRes
 import androidx.compose.animation.AnimatedVisibility
@@ -22,11 +22,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.ecoute.android.LocalPlayerAwareWindowInsets
-import com.ecoute.android.R
-import com.ecoute.android.utils.ScrollingInfo
-import com.ecoute.android.utils.scrollingInfo
-import com.ecoute.android.utils.smoothScrollToTop
+import com.ecoute.music.LocalPlayerAwareWindowInsets
+import com.ecoute.music.R
+import com.ecoute.music.utils.ScrollingInfo
+import com.ecoute.music.utils.scrollingInfo
+import com.ecoute.music.utils.smoothScrollToTop
 import kotlinx.coroutines.launch
 
 @Composable

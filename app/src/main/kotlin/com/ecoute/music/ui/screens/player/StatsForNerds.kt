@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.screens.player
+package com.ecoute.music.ui.screens.player
 
 import android.content.ClipData
 import android.content.ClipDescription
@@ -37,12 +37,12 @@ import androidx.compose.ui.unit.dp
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.cache.Cache
 import androidx.media3.datasource.cache.CacheSpan
-import com.ecoute.android.Database
-import com.ecoute.android.LocalPlayerServiceBinder
-import com.ecoute.android.R
-import com.ecoute.android.models.Format
-import com.ecoute.android.utils.color
-import com.ecoute.android.utils.medium
+import com.ecoute.music.Database
+import com.ecoute.music.LocalPlayerServiceBinder
+import com.ecoute.music.R
+import com.ecoute.music.models.Format
+import com.ecoute.music.utils.color
+import com.ecoute.music.utils.medium
 import com.ecoute.core.ui.LocalAppearance
 import com.ecoute.core.ui.onOverlay
 import com.ecoute.core.ui.overlay

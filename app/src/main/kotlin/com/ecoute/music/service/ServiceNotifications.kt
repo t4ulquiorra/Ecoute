@@ -1,4 +1,4 @@
-package com.ecoute.android.service
+package com.ecoute.music.service
 
 import android.app.Application
 import android.app.Notification
@@ -15,7 +15,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.getSystemService
 import androidx.media3.common.util.NotificationUtil.Importance
 import androidx.media3.common.util.UnstableApi
-import com.ecoute.android.R
+import com.ecoute.music.R
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.math.absoluteValue
 import kotlin.properties.PropertyDelegateProvider

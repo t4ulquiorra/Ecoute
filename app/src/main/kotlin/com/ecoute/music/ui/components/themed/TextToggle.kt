@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.components.themed
+package com.ecoute.music.ui.components.themed
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedContentTransitionScope
@@ -16,8 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.ecoute.android.R
-import com.ecoute.android.utils.medium
+import com.ecoute.music.R
+import com.ecoute.music.utils.medium
 import com.ecoute.core.ui.LocalAppearance
 import com.ecoute.core.ui.utils.roundedShape
 

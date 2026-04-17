@@ -1,4 +1,4 @@
-package com.ecoute.android.models.ui
+package com.ecoute.music.models.ui
 
 import androidx.media3.common.MediaItem
 import com.ecoute.core.ui.utils.songBundle

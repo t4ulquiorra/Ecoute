@@ -1,4 +1,4 @@
-package com.ecoute.android.service
+package com.ecoute.music.service
 
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
@@ -62,47 +62,47 @@ import androidx.media3.exoplayer.audio.SilenceSkippingAudioProcessor
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.exoplayer.upstream.DefaultLoadErrorHandlingPolicy
 import androidx.media3.extractor.DefaultExtractorsFactory
-import com.ecoute.android.Database
-import com.ecoute.android.Dependencies
-import com.ecoute.android.MainActivity
-import com.ecoute.android.R
-import com.ecoute.android.models.Event
-import com.ecoute.android.models.Format
-import com.ecoute.android.models.QueuedMediaItem
-import com.ecoute.android.models.Song
-import com.ecoute.android.models.SongWithContentLength
-import com.ecoute.android.preferences.AppearancePreferences
-import com.ecoute.android.preferences.DataPreferences
-import com.ecoute.android.preferences.PlayerPreferences
-import com.ecoute.android.query
-import com.ecoute.android.transaction
-import com.ecoute.android.utils.ActionReceiver
-import com.ecoute.android.utils.ConditionalCacheDataSourceFactory
-import com.ecoute.android.utils.GlyphInterface
-import com.ecoute.android.utils.InvincibleService
-import com.ecoute.android.utils.TimerJob
-import com.ecoute.android.utils.YouTubeDLResponse
-import com.ecoute.android.utils.YouTubeRadio
-import com.ecoute.android.utils.activityPendingIntent
-import com.ecoute.android.utils.asDataSource
-import com.ecoute.android.utils.broadcastPendingIntent
-import com.ecoute.android.utils.defaultDataSource
-import com.ecoute.android.utils.findCause
-import com.ecoute.android.utils.findNextMediaItemById
-import com.ecoute.android.utils.forcePlayFromBeginning
-import com.ecoute.android.utils.forceSeekToNext
-import com.ecoute.android.utils.forceSeekToPrevious
-import com.ecoute.android.utils.get
-import com.ecoute.android.utils.handleUnknownErrors
-import com.ecoute.android.utils.intent
-import com.ecoute.android.utils.mediaItems
-import com.ecoute.android.utils.progress
-import com.ecoute.android.utils.readOnlyWhen
-import com.ecoute.android.utils.setPlaybackPitch
-import com.ecoute.android.utils.shouldBePlaying
-import com.ecoute.android.utils.thumbnail
-import com.ecoute.android.utils.timer
-import com.ecoute.android.utils.toast
+import com.ecoute.music.Database
+import com.ecoute.music.Dependencies
+import com.ecoute.music.MainActivity
+import com.ecoute.music.R
+import com.ecoute.music.models.Event
+import com.ecoute.music.models.Format
+import com.ecoute.music.models.QueuedMediaItem
+import com.ecoute.music.models.Song
+import com.ecoute.music.models.SongWithContentLength
+import com.ecoute.music.preferences.AppearancePreferences
+import com.ecoute.music.preferences.DataPreferences
+import com.ecoute.music.preferences.PlayerPreferences
+import com.ecoute.music.query
+import com.ecoute.music.transaction
+import com.ecoute.music.utils.ActionReceiver
+import com.ecoute.music.utils.ConditionalCacheDataSourceFactory
+import com.ecoute.music.utils.GlyphInterface
+import com.ecoute.music.utils.InvincibleService
+import com.ecoute.music.utils.TimerJob
+import com.ecoute.music.utils.YouTubeDLResponse
+import com.ecoute.music.utils.YouTubeRadio
+import com.ecoute.music.utils.activityPendingIntent
+import com.ecoute.music.utils.asDataSource
+import com.ecoute.music.utils.broadcastPendingIntent
+import com.ecoute.music.utils.defaultDataSource
+import com.ecoute.music.utils.findCause
+import com.ecoute.music.utils.findNextMediaItemById
+import com.ecoute.music.utils.forcePlayFromBeginning
+import com.ecoute.music.utils.forceSeekToNext
+import com.ecoute.music.utils.forceSeekToPrevious
+import com.ecoute.music.utils.get
+import com.ecoute.music.utils.handleUnknownErrors
+import com.ecoute.music.utils.intent
+import com.ecoute.music.utils.mediaItems
+import com.ecoute.music.utils.progress
+import com.ecoute.music.utils.readOnlyWhen
+import com.ecoute.music.utils.setPlaybackPitch
+import com.ecoute.music.utils.shouldBePlaying
+import com.ecoute.music.utils.thumbnail
+import com.ecoute.music.utils.timer
+import com.ecoute.music.utils.toast
 import com.ecoute.compose.preferences.SharedPreferencesProperty
 import com.ecoute.core.data.enums.ExoPlayerDiskCacheSize
 import com.ecoute.core.data.utils.UriCache
@@ -172,8 +172,8 @@ val DataSpec.isLocal get() = key?.startsWith(LOCAL_KEY_PREFIX) == true
 val MediaItem.isLocal get() = mediaId.startsWith(LOCAL_KEY_PREFIX)
 val Song.isLocal get() = id.startsWith(LOCAL_KEY_PREFIX)
 
-private const val LIKE_ACTION = "com.ecoute.android.LIKE"
-private const val LOOP_ACTION = "com.ecoute.android.LOOP"
+private const val LIKE_ACTION = "com.ecoute.music.LIKE"
+private const val LOOP_ACTION = "com.ecoute.music.LOOP"
 
 @kotlin.OptIn(ExperimentalCoroutinesApi::class)
 @Suppress("LargeClass", "TooManyFunctions") // intended in this class: it is a service
@@ -1276,7 +1276,7 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
     }
 
     inner class NotificationActionReceiver internal constructor() :
-        ActionReceiver("com.ecoute.android") {
+        ActionReceiver("com.ecoute.music") {
         val pause by action { _, _ ->
             player.pause()
         }

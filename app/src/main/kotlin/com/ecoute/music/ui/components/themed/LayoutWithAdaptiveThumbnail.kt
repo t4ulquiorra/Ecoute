@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.components.themed
+package com.ecoute.music.ui.components.themed
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
-import com.ecoute.android.utils.thumbnail
+import com.ecoute.music.utils.thumbnail
 import com.ecoute.core.ui.Dimensions
 import com.ecoute.core.ui.LocalAppearance
 import com.ecoute.core.ui.shimmer

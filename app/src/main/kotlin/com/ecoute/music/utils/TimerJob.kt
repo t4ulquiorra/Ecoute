@@ -1,4 +1,4 @@
-package com.ecoute.android.utils
+package com.ecoute.music.utils
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay

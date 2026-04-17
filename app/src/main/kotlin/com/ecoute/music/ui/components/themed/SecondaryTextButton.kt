@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.components.themed
+package com.ecoute.music.ui.components.themed
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -8,9 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.ecoute.android.utils.center
-import com.ecoute.android.utils.disabled
-import com.ecoute.android.utils.medium
+import com.ecoute.music.utils.center
+import com.ecoute.music.utils.disabled
+import com.ecoute.music.utils.medium
 import com.ecoute.core.ui.LocalAppearance
 import com.ecoute.core.ui.surface
 import com.ecoute.core.ui.utils.roundedShape

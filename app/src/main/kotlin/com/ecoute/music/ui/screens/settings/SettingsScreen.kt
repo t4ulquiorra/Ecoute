@@ -1,6 +1,6 @@
 @file:Suppress("TooManyFunctions")
 
-package com.ecoute.android.ui.screens.settings
+package com.ecoute.music.ui.screens.settings
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
@@ -37,19 +37,19 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.text
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
-import com.ecoute.android.LocalPlayerAwareWindowInsets
-import com.ecoute.android.R
-import com.ecoute.android.ui.components.themed.Header
-import com.ecoute.android.ui.components.themed.NumberFieldDialog
-import com.ecoute.android.ui.components.themed.Scaffold
-import com.ecoute.android.ui.components.themed.Slider
-import com.ecoute.android.ui.components.themed.Switch
-import com.ecoute.android.ui.components.themed.ValueSelectorDialog
-import com.ecoute.android.ui.screens.GlobalRoutes
-import com.ecoute.android.ui.screens.Route
-import com.ecoute.android.utils.color
-import com.ecoute.android.utils.secondary
-import com.ecoute.android.utils.semiBold
+import com.ecoute.music.LocalPlayerAwareWindowInsets
+import com.ecoute.music.R
+import com.ecoute.music.ui.components.themed.Header
+import com.ecoute.music.ui.components.themed.NumberFieldDialog
+import com.ecoute.music.ui.components.themed.Scaffold
+import com.ecoute.music.ui.components.themed.Slider
+import com.ecoute.music.ui.components.themed.Switch
+import com.ecoute.music.ui.components.themed.ValueSelectorDialog
+import com.ecoute.music.ui.screens.GlobalRoutes
+import com.ecoute.music.ui.screens.Route
+import com.ecoute.music.utils.color
+import com.ecoute.music.utils.secondary
+import com.ecoute.music.utils.semiBold
 import com.ecoute.compose.persist.PersistMapCleanup
 import com.ecoute.compose.routing.RouteHandler
 import com.ecoute.core.ui.LocalAppearance

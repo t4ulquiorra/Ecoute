@@ -1,4 +1,4 @@
-package com.ecoute.android.utils
+package com.ecoute.music.utils
 
 import androidx.annotation.OptIn
 import androidx.compose.animation.AnimatedContent
@@ -24,16 +24,16 @@ import androidx.media3.datasource.DataSource
 import androidx.media3.datasource.DataSpec
 import androidx.media3.datasource.TransferListener
 import androidx.media3.datasource.cache.CacheDataSource
-import com.ecoute.android.Database
-import com.ecoute.android.LocalPlayerServiceBinder
-import com.ecoute.android.R
-import com.ecoute.android.models.Format
-import com.ecoute.android.service.LOCAL_KEY_PREFIX
-import com.ecoute.android.service.PlayerService
-import com.ecoute.android.service.PrecacheService
-import com.ecoute.android.service.downloadState
-import com.ecoute.android.ui.components.themed.CircularProgressIndicator
-import com.ecoute.android.ui.components.themed.HeaderIconButton
+import com.ecoute.music.Database
+import com.ecoute.music.LocalPlayerServiceBinder
+import com.ecoute.music.R
+import com.ecoute.music.models.Format
+import com.ecoute.music.service.LOCAL_KEY_PREFIX
+import com.ecoute.music.service.PlayerService
+import com.ecoute.music.service.PrecacheService
+import com.ecoute.music.service.downloadState
+import com.ecoute.music.ui.components.themed.CircularProgressIndicator
+import com.ecoute.music.ui.components.themed.HeaderIconButton
 import com.ecoute.core.ui.LocalAppearance
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.distinctUntilChanged

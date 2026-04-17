@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.screens.builtinplaylist
+package com.ecoute.music.ui.screens.builtinplaylist
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -9,12 +9,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.ui.res.stringResource
-import com.ecoute.android.R
-import com.ecoute.android.preferences.DataPreferences
-import com.ecoute.android.preferences.UIStatePreferences
-import com.ecoute.android.ui.components.themed.Scaffold
-import com.ecoute.android.ui.screens.GlobalRoutes
-import com.ecoute.android.ui.screens.Route
+import com.ecoute.music.R
+import com.ecoute.music.preferences.DataPreferences
+import com.ecoute.music.preferences.UIStatePreferences
+import com.ecoute.music.ui.components.themed.Scaffold
+import com.ecoute.music.ui.screens.GlobalRoutes
+import com.ecoute.music.ui.screens.Route
 import com.ecoute.compose.persist.PersistMapCleanup
 import com.ecoute.compose.routing.RouteHandler
 import com.ecoute.core.data.enums.BuiltInPlaylist

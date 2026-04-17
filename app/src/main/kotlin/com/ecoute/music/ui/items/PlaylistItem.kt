@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.items
+package com.ecoute.music.ui.items
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -28,15 +28,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.ecoute.android.Database
-import com.ecoute.android.models.PlaylistPreview
-import com.ecoute.android.ui.components.themed.TextPlaceholder
-import com.ecoute.android.utils.center
-import com.ecoute.android.utils.color
-import com.ecoute.android.utils.medium
-import com.ecoute.android.utils.secondary
-import com.ecoute.android.utils.semiBold
-import com.ecoute.android.utils.thumbnail
+import com.ecoute.music.Database
+import com.ecoute.music.models.PlaylistPreview
+import com.ecoute.music.ui.components.themed.TextPlaceholder
+import com.ecoute.music.utils.center
+import com.ecoute.music.utils.color
+import com.ecoute.music.utils.medium
+import com.ecoute.music.utils.secondary
+import com.ecoute.music.utils.semiBold
+import com.ecoute.music.utils.thumbnail
 import com.ecoute.core.ui.Dimensions
 import com.ecoute.core.ui.LocalAppearance
 import com.ecoute.core.ui.onOverlay

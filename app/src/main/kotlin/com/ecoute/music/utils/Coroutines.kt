@@ -1,4 +1,4 @@
-package com.ecoute.android.utils
+package com.ecoute.music.utils
 
 import android.os.CancellationSignal
 import kotlinx.coroutines.CancellableContinuation

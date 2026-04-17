@@ -1,4 +1,4 @@
-package com.ecoute.android.service
+package com.ecoute.music.service
 
 import android.content.Context
 import android.content.res.Configuration
@@ -6,7 +6,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import androidx.core.graphics.applyCanvas
 import androidx.core.graphics.createBitmap
-import com.ecoute.android.utils.thumbnail
+import com.ecoute.music.utils.thumbnail
 import coil3.imageLoader
 import coil3.request.Disposable
 import coil3.request.ImageRequest

@@ -1,4 +1,4 @@
-package com.ecoute.android.utils
+package com.ecoute.music.utils
 
 import android.app.PendingIntent
 import android.content.BroadcastReceiver

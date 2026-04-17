@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.components.themed
+package com.ecoute.music.ui.components.themed
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxWidth

@@ -1,4 +1,4 @@
-package com.ecoute.android.service
+package com.ecoute.music.service
 
 import android.content.ComponentName
 import android.content.Context
@@ -20,13 +20,13 @@ import androidx.media3.exoplayer.offline.DownloadRequest
 import androidx.media3.exoplayer.offline.DownloadService
 import androidx.media3.exoplayer.scheduler.Requirements
 import androidx.media3.exoplayer.workmanager.WorkManagerScheduler
-import com.ecoute.android.Database
-import com.ecoute.android.R
-import com.ecoute.android.transaction
-import com.ecoute.android.utils.ActionReceiver
-import com.ecoute.android.utils.download
-import com.ecoute.android.utils.intent
-import com.ecoute.android.utils.toast
+import com.ecoute.music.Database
+import com.ecoute.music.R
+import com.ecoute.music.transaction
+import com.ecoute.music.utils.ActionReceiver
+import com.ecoute.music.utils.download
+import com.ecoute.music.utils.intent
+import com.ecoute.music.utils.toast
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.CoroutineScope
@@ -105,7 +105,7 @@ class PrecacheService : DownloadService(
         }
     }
 
-    inner class NotificationActionReceiver : ActionReceiver("com.ecoute.android.precache") {
+    inner class NotificationActionReceiver : ActionReceiver("com.ecoute.music.precache") {
         val cancel by action { context, _ ->
             runCatching {
                 sendPauseDownloads(

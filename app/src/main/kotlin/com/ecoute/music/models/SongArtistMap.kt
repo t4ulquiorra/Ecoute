@@ -1,4 +1,4 @@
-package com.ecoute.android.models
+package com.ecoute.music.models
 
 import androidx.compose.runtime.Immutable
 import androidx.room.ColumnInfo

@@ -1,4 +1,4 @@
-package com.ecoute.android.utils
+package com.ecoute.music.utils
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -22,9 +22,9 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.common.Timeline
-import com.ecoute.android.LocalPlayerServiceBinder
-import com.ecoute.android.R
-import com.ecoute.android.service.PlayerService
+import com.ecoute.music.LocalPlayerServiceBinder
+import com.ecoute.music.R
+import com.ecoute.music.service.PlayerService
 import com.ecoute.core.ui.utils.EqualizerIntentBundleAccessor
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds

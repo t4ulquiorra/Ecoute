@@ -1,4 +1,4 @@
-package com.ecoute.android.ui.components.themed
+package com.ecoute.music.ui.components.themed
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedContentTransitionScope.SlideDirection.Companion.Down
@@ -17,8 +17,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.IntOffset
-import com.ecoute.android.R
-import com.ecoute.android.preferences.UIStatePreferences
+import com.ecoute.music.R
+import com.ecoute.music.preferences.UIStatePreferences
 import com.ecoute.core.ui.LocalAppearance
 import kotlinx.collections.immutable.toImmutableList
 

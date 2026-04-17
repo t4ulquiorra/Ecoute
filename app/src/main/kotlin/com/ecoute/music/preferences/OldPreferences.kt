@@ -1,6 +1,6 @@
-package com.ecoute.android.preferences
+package com.ecoute.music.preferences
 
-import com.ecoute.android.GlobalPreferencesHolder
+import com.ecoute.music.GlobalPreferencesHolder
 
 internal object OldPreferences : GlobalPreferencesHolder() {
     val oldColorPaletteName by enum(ColorPaletteName.Dynamic, "colorPaletteName")
