@@ -1342,16 +1342,16 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
             val mediaId = dataSpec.key?.removePrefix("https://youtube.com/watch?v=")
                 ?: error("A key must be set")
 
-            fun DataSpec.ranged(contentLength: Long?) = contentLength?.let {
-                if (chunkLength == null) return@let null
-
+            fun DataSpec.ranged(contentLength: Long?): DataSpec {
+                if (chunkLength == null) return this
                 val start = dataSpec.uriPositionOffset
-                val length = (contentLength - start).coerceAtMost(chunkLength)
+                val length = contentLength
+                    ?.let { (it - start).coerceAtMost(chunkLength) }
+                    ?: chunkLength
                 val rangeText = "$start-${start + length}"
-
-                this.subrange(start, length)
+                return this.subrange(start, length)
                     .withAdditionalHeaders(mapOf("Range" to "bytes=$rangeText"))
-            } ?: this
+            }
 
             if (
                 dataSpec.isLocal || (
