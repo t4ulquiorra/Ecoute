@@ -154,7 +154,7 @@ fun String?.thumbnail(
         this?.startsWith("https://lh3.googleusercontent.com") == true -> "$this-w$actualSize-h$actualSize"
         this?.startsWith("https://yt3.ggpht.com") == true -> "$this-w$actualSize-h$actualSize-s$actualSize"
         this?.startsWith("https://yt3.googleusercontent.com") == true -> "$this-w$actualSize-h$actualSize-s$actualSize"
-        this?.contains("ytimg.com") == true -> this.replace(Regex("=w\d+-h\d+"), "=w$actualSize-h$actualSize")
+        this?.contains("ytimg.com") == true -> this.replace(Regex("=w[0-9]+-h[0-9]+"), "=w$actualSize-h$actualSize")
         else -> this
     }
 }
