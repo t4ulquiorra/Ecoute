@@ -1353,9 +1353,7 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
                 val length = contentLength
                     ?.let { (it - start).coerceAtMost(chunkLength) }
                     ?: chunkLength
-                val rangeText = "$start-${start + length}"
                 return this.subrange(start, length)
-                    .withAdditionalHeaders(mapOf("Range" to "bytes=$rangeText"))
             }
 
             if (
