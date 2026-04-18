@@ -1377,33 +1377,9 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
 
                 // Use NewPipe Extractor for reliable stream resolution.
                 // It handles n-param decryption, cipher, and all YouTube obfuscation natively.
-                val (uri, contentLength) = runCatching {
-                    val streamInfo = org.schabi.newpipe.extractor.stream.StreamInfo
-                        .getInfo(ServiceList.YouTube, "https://www.youtube.com/watch?v=$mediaId")
-                    val audioStream = streamInfo.audioStreams
-                        .filter { it.url != null }
-                        .maxByOrNull { it.averageBitrate }
-                        ?: throw UnplayableException()
-                    val streamUrl = audioStream.url!!
-    val fetchedLength = runCatching {
-        val conn = java.net.URL(streamUrl).openConnection() as java.net.HttpURLConnection
-        conn.requestMethod = "GET"
-        conn.setRequestProperty("Range", "bytes=0-0")
-        conn.connectTimeout = 3000
-        conn.readTimeout = 3000
-        conn.connect()
-        val range = conn.getHeaderField("Content-Range")
-        conn.disconnect()
-        range?.substringAfterLast("/")?.toLongOrNull()?.takeIf { it > 0 }
-    }.getOrNull()
-    Pair(streamUrl.toUri(), fetchedLength)
-                }.getOrElse {
-                    it.printStackTrace()
-                    // Last resort: try raw InnerTube URL
-                    val rawUrl = youtubeFormat?.url?.takeIf { u -> u.isNotBlank() }
-                        ?: throw UnplayableException()
-                    Pair(rawUrl.toUri(), youtubeFormat?.contentLength)
-                }
+                val directUrl = youtubeFormat?.url?.takeIf { it.isNotBlank() }
+                    ?: throw UnplayableException()
+                val (uri, contentLength) = Pair(directUrl.toUri(), youtubeFormat?.contentLength)
 
                 val mediaItem = runCatching {
                     runBlocking(Dispatchers.IO) { findMediaItem(mediaId) }
