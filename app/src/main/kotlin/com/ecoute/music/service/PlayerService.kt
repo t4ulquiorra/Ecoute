@@ -1377,15 +1377,45 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
                 // Only fall back to yt-dlp if InnerTube URL is missing
                 val rawUrl = youtubeFormat?.url?.takeIf { it.isNotBlank() }
 
-                // Decode n-param throttling if we have a direct InnerTube URL
-                val directUrl = rawUrl?.let { url ->
-                    runBlocking(Dispatchers.IO) {
-                        com.ecoute.music.utils.NParamDecoder.decode(url)
-                    }
+                // Try InnerTube URL with n-param decode first.
+                // If decode fails or URL is missing, fall back to yt-dlp.
+                val decodedUrl = rawUrl?.let { url ->
+                    runCatching {
+                        runBlocking(Dispatchers.IO) {
+                            com.ecoute.music.utils.NParamDecoder.decode(url)
+                        }
+                    }.getOrNull()?.takeIf { it.isNotBlank() }
                 }
 
+                val directUrl = decodedUrl ?: rawUrl
+
                 val (uri, contentLength) = if (directUrl != null) {
-                    Pair(directUrl.toUri(), youtubeFormat?.contentLength)
+                    // Verify the URL is actually playable by checking it's not throttled
+                    // We do a lightweight HEAD request to check for 403/redirect issues
+                    val headOk = runCatching {
+                        val conn = java.net.URL(directUrl).openConnection() as java.net.HttpURLConnection
+                        conn.requestMethod = "HEAD"
+                        conn.connectTimeout = 3000
+                        conn.readTimeout = 3000
+                        conn.instanceFollowRedirects = false
+                        val code = conn.responseCode
+                        conn.disconnect()
+                        code in 200..299
+                    }.getOrDefault(false)
+
+                    if (headOk) {
+                        Pair(directUrl.toUri(), youtubeFormat?.contentLength)
+                    } else {
+                        // HEAD check failed — fall through to yt-dlp
+                        val info = runCatching {
+                            Dependencies.runDownload(mediaId)
+                        }.mapCatching {
+                            YouTubeDLResponse.fromString(it)
+                        }.also { it.exceptionOrNull()?.printStackTrace() }.getOrNull()
+                        if (info?.id != mediaId) throw VideoIdMismatchException()
+                        val dlUri = runCatching { info.url?.toUri() }.getOrNull() ?: throw UnplayableException()
+                        Pair(dlUri, info.fileSize)
+                    }
                 } else {
                     val info = runCatching {
                         Dependencies.runDownload(mediaId)
