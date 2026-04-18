@@ -1378,6 +1378,11 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
                 // Use NewPipe Extractor for reliable stream resolution.
                 // It handles n-param decryption, cipher, and all YouTube obfuscation natively.
                 val directUrl = youtubeFormat?.url?.takeIf { it.isNotBlank() }
+                    ?: body?.streamingData?.adaptiveFormats
+                        ?.filter { it.mimeType?.startsWith("audio/") == true }
+                        ?.maxByOrNull { it.bitrate ?: 0L }
+                        ?.url?.takeIf { it.isNotBlank() }
+                    ?: throw UnplayableException()
                     ?: throw UnplayableException()
                 val (uri, contentLength) = Pair(directUrl.toUri(), youtubeFormat?.contentLength)
 
@@ -1423,6 +1428,7 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
 
                 dataSpec
                     .withUri(uri)
+                    .subrange(dataSpec.uriPositionOffset, chunkLength ?: DEFAULT_CHUNK_LENGTH)
             }
         }.handleUnknownErrors {
             uriCache.clear()
