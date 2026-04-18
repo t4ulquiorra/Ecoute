@@ -1384,17 +1384,6 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
                         ?.url?.takeIf { it.isNotBlank() }
                     ?: throw UnplayableException()
                 val transformedUrl = kotlinx.coroutines.runBlocking(kotlinx.coroutines.Dispatchers.IO) { com.ecoute.music.utils.cipher.CipherDeobfuscator.transformNParamInUrl(directUrl) }
-                try {
-                    val logFile = java.io.File(applicationContext.filesDir, "url_debug.txt")
-                    val same = directUrl == transformedUrl
-                    logFile.writeText("ORIGINAL:\n" + directUrl + "\n\nTRANSFORMED:\n" + transformedUrl + "\n\nSAME:" + same)
-$directUrl
-
-TRANSFORMED:
-$transformedUrl
-
-SAME:${directUrl == transformedUrl}")
-                } catch (_: Exception) {}
                 val (uri, contentLength) = Pair(transformedUrl.toUri(), youtubeFormat?.contentLength)
 
                 val mediaItem = runCatching {
