@@ -53,3 +53,12 @@
 -dontwarn org.slf4j.impl.StaticLoggerBinder
 
 -keep class ch.qos.logback.classic.android.** { *; }
+
+# NewPipe Extractor
+-keep class org.schabi.newpipe.extractor.** { *; }
+-dontwarn org.schabi.newpipe.extractor.**
+-keep class com.grack.nanojson.** { *; }
+-dontwarn com.grack.nanojson.**
+-keep class org.mozilla.javascript.** { *; }
+-dontwarn org.mozilla.javascript.**
+-dontwarn org.mozilla.classfile.ClassFileWriter
