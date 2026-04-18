@@ -1377,6 +1377,7 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
 
                 // Use NewPipe Extractor for reliable stream resolution.
                 // It handles n-param decryption, cipher, and all YouTube obfuscation natively.
+                java.io.File(context.filesDir, "url_debug.txt").writeText("FORMAT:" + youtubeFormat?.toString().orEmpty().take(300))
                 val directUrl = youtubeFormat?.url?.takeIf { it.isNotBlank() }
                     ?: body?.streamingData?.adaptiveFormats
                         ?.filter { it.mimeType?.startsWith("audio/") == true }
