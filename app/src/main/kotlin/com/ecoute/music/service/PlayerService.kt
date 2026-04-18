@@ -1373,16 +1373,22 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
                 }?.getOrNull()
                 val youtubeFormat = body?.streamingData?.highestQualityFormat
 
-                val info = runCatching {
-                    Dependencies.runDownload(mediaId)
-                }.mapCatching {
-                    YouTubeDLResponse.fromString(it)
-                }.also { it.exceptionOrNull()?.printStackTrace() }.getOrNull()
-                if (info?.id != mediaId) throw VideoIdMismatchException()
-                val format = info.formats?.firstOrNull { it.formatId == info.formatId }
+                // Try InnerTube URL first (ANDROID_MUSIC gives clean unthrottled URLs)
+                // Only fall back to yt-dlp if InnerTube URL is missing
+                val directUrl = youtubeFormat?.url?.takeIf { it.isNotBlank() }
 
-                val uri =
-                    runCatching { info.url?.toUri() }.getOrNull() ?: throw UnplayableException()
+                val (uri, contentLength) = if (directUrl != null) {
+                    Pair(directUrl.toUri(), youtubeFormat?.contentLength)
+                } else {
+                    val info = runCatching {
+                        Dependencies.runDownload(mediaId)
+                    }.mapCatching {
+                        YouTubeDLResponse.fromString(it)
+                    }.also { it.exceptionOrNull()?.printStackTrace() }.getOrNull()
+                    if (info?.id != mediaId) throw VideoIdMismatchException()
+                    val dlUri = runCatching { info.url?.toUri() }.getOrNull() ?: throw UnplayableException()
+                    Pair(dlUri, info.fileSize)
+                }
 
                 val mediaItem = runCatching {
                     runBlocking(Dispatchers.IO) { findMediaItem(mediaId) }
@@ -1407,11 +1413,11 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
                         Database.insert(
                             Format(
                                 songId = mediaId,
-                                itag = info.formatId?.toIntOrNull(),
+                                itag = youtubeFormat?.itag,
                                 mimeType = youtubeFormat?.mimeType,
-                                bitrate = format?.abr?.let { it * 1000 }?.toLong(),
+                                bitrate = youtubeFormat?.bitrate,
                                 loudnessDb = body?.playerConfig?.audioConfig?.normalizedLoudnessDb,
-                                contentLength = info.fileSize,
+                                contentLength = contentLength,
                                 lastModified = youtubeFormat?.lastModified
                             )
                         )
@@ -1420,13 +1426,13 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
 
                 uriCache.push(
                     key = mediaId,
-                    meta = info.fileSize,
+                    meta = contentLength,
                     uri = uri
                 )
 
                 dataSpec
                     .withUri(uri)
-                    .ranged(info.fileSize)
+                    .ranged(contentLength)
             }
         }.handleUnknownErrors {
             uriCache.clear()
