@@ -1386,7 +1386,17 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
                         .filter { it.url != null }
                         .maxByOrNull { it.averageBitrate }
                         ?: throw UnplayableException()
-                    Pair(audioStream.url!!.toUri(), null as Long?)
+                    val streamUrl = audioStream.url!!
+    val fetchedLength = runCatching {
+        val conn = java.net.URL(streamUrl).openConnection() as java.net.HttpURLConnection
+        conn.requestMethod = "HEAD"
+        conn.connectTimeout = 3000
+        conn.readTimeout = 3000
+        val len = conn.contentLengthLong
+        conn.disconnect()
+        len.takeIf { it > 0 }
+    }.getOrNull()
+    Pair(streamUrl.toUri(), fetchedLength)
                 }.getOrElse {
                     it.printStackTrace()
                     // Last resort: try raw InnerTube URL
