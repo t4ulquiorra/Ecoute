@@ -1349,7 +1349,7 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
 
             fun DataSpec.ranged(contentLength: Long?): DataSpec {
                 if (chunkLength == null) return this
-                val start = dataSpec.uriPositionOffset
+                val start = dataSpec.position
                 val length = contentLength
                     ?.let { (it - start).coerceAtMost(chunkLength) }
                     ?: chunkLength
