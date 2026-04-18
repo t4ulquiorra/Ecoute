@@ -141,9 +141,6 @@ composeCompiler {
     }
 }
 
-    }
-}
-
 dependencies {
     coreLibraryDesugaring(libs.desugaring)
 
