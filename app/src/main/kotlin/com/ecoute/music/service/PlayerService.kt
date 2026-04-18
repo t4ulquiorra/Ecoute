@@ -1375,7 +1375,14 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
 
                 // Try InnerTube URL first (ANDROID_MUSIC gives clean unthrottled URLs)
                 // Only fall back to yt-dlp if InnerTube URL is missing
-                val directUrl = youtubeFormat?.url?.takeIf { it.isNotBlank() }
+                val rawUrl = youtubeFormat?.url?.takeIf { it.isNotBlank() }
+
+                // Decode n-param throttling if we have a direct InnerTube URL
+                val directUrl = rawUrl?.let { url ->
+                    runBlocking(Dispatchers.IO) {
+                        com.ecoute.music.utils.NParamDecoder.decode(url)
+                    }
+                }
 
                 val (uri, contentLength) = if (directUrl != null) {
                     Pair(directUrl.toUri(), youtubeFormat?.contentLength)
