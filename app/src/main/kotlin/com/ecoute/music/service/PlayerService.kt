@@ -1383,10 +1383,10 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
                     val streamInfo = org.schabi.newpipe.extractor.stream.StreamInfo
                         .getInfo(ServiceList.YouTube, "https://www.youtube.com/watch?v=$mediaId")
                     val audioStream = streamInfo.audioStreams
-                        .filter { it.torrentUrl == null }
+                        .filter { it.url != null }
                         .maxByOrNull { it.averageBitrate }
                         ?: throw UnplayableException()
-                    Pair(audioStream.content.toUri(), null as Long?)
+                    Pair(audioStream.url.toUri(), null as Long?)
                 }.getOrElse {
                     it.printStackTrace()
                     // Last resort: try raw InnerTube URL

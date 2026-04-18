@@ -42,9 +42,9 @@ object NewPipeDownloader : Downloader() {
                 ?.bufferedReader()?.readText() ?: ""
         }.getOrDefault("")
 
-        val responseHeaders = conn.headerFields
+        val responseHeaders: Map<String, List<String>> = conn.headerFields
             .filterKeys { it != null }
-            .mapValues { it.value.joinToString(", ") }
+            .mapValues { it.value ?: emptyList() }
 
         conn.disconnect()
 
