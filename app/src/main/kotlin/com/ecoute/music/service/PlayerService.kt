@@ -1389,12 +1389,14 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
                     val streamUrl = audioStream.url!!
     val fetchedLength = runCatching {
         val conn = java.net.URL(streamUrl).openConnection() as java.net.HttpURLConnection
-        conn.requestMethod = "HEAD"
+        conn.requestMethod = "GET"
+        conn.setRequestProperty("Range", "bytes=0-0")
         conn.connectTimeout = 3000
         conn.readTimeout = 3000
-        val len = conn.contentLengthLong
+        conn.connect()
+        val range = conn.getHeaderField("Content-Range")
         conn.disconnect()
-        len.takeIf { it > 0 }
+        range?.substringAfterLast("/")?.toLongOrNull()?.takeIf { it > 0 }
     }.getOrNull()
     Pair(streamUrl.toUri(), fetchedLength)
                 }.getOrElse {
