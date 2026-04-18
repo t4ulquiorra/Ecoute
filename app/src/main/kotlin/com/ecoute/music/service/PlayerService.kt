@@ -1449,7 +1449,6 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
 
                 dataSpec
                     .withUri(uri)
-                    .ranged(contentLength)
             }
         }.handleUnknownErrors {
             uriCache.clear()
