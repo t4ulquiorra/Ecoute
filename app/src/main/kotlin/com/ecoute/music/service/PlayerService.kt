@@ -1368,7 +1368,7 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
             else uriCache[mediaId]?.let { cachedUri ->
                 dataSpec
                     .withUri(cachedUri.uri)
-                    .ranged(cachedUri.meta)
+                    .subrange(dataSpec.uriPositionOffset, chunkLength ?: DEFAULT_CHUNK_LENGTH)
             } ?: run {
                 val body = runBlocking(Dispatchers.IO) {
                     Innertube.player(PlayerBody(videoId = mediaId))
