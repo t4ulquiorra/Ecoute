@@ -62,8 +62,13 @@ import androidx.media3.exoplayer.audio.SilenceSkippingAudioProcessor
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.exoplayer.upstream.DefaultLoadErrorHandlingPolicy
 import androidx.media3.extractor.DefaultExtractorsFactory
+import org.schabi.newpipe.extractor.NewPipe
+import org.schabi.newpipe.extractor.ServiceList
+import org.schabi.newpipe.extractor.downloader.Downloader
+import org.schabi.newpipe.extractor.downloader.Request
+import org.schabi.newpipe.extractor.downloader.Response
+import org.schabi.newpipe.extractor.stream.AudioStream
 import com.ecoute.music.Database
-import com.ecoute.music.Dependencies
 import com.ecoute.music.MainActivity
 import com.ecoute.music.R
 import com.ecoute.music.models.Event
@@ -81,7 +86,6 @@ import com.ecoute.music.utils.ConditionalCacheDataSourceFactory
 import com.ecoute.music.utils.GlyphInterface
 import com.ecoute.music.utils.InvincibleService
 import com.ecoute.music.utils.TimerJob
-import com.ecoute.music.utils.YouTubeDLResponse
 import com.ecoute.music.utils.YouTubeRadio
 import com.ecoute.music.utils.activityPendingIntent
 import com.ecoute.music.utils.asDataSource
@@ -1373,58 +1377,22 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
                 }?.getOrNull()
                 val youtubeFormat = body?.streamingData?.highestQualityFormat
 
-                // Try InnerTube URL first (ANDROID_MUSIC gives clean unthrottled URLs)
-                // Only fall back to yt-dlp if InnerTube URL is missing
-                val rawUrl = youtubeFormat?.url?.takeIf { it.isNotBlank() }
-
-                // Try InnerTube URL with n-param decode first.
-                // If decode fails or URL is missing, fall back to yt-dlp.
-                val decodedUrl = rawUrl?.let { url ->
-                    runCatching {
-                        runBlocking(Dispatchers.IO) {
-                            com.ecoute.music.utils.NParamDecoder.decode(url)
-                        }
-                    }.getOrNull()?.takeIf { it.isNotBlank() }
-                }
-
-                val directUrl = decodedUrl ?: rawUrl
-
-                val (uri, contentLength) = if (directUrl != null) {
-                    // Verify the URL is actually playable by checking it's not throttled
-                    // We do a lightweight HEAD request to check for 403/redirect issues
-                    val headOk = runCatching {
-                        val conn = java.net.URL(directUrl).openConnection() as java.net.HttpURLConnection
-                        conn.requestMethod = "HEAD"
-                        conn.connectTimeout = 3000
-                        conn.readTimeout = 3000
-                        conn.instanceFollowRedirects = false
-                        val code = conn.responseCode
-                        conn.disconnect()
-                        code in 200..299
-                    }.getOrDefault(false)
-
-                    if (headOk) {
-                        Pair(directUrl.toUri(), youtubeFormat?.contentLength)
-                    } else {
-                        // HEAD check failed — fall through to yt-dlp
-                        val info = runCatching {
-                            Dependencies.runDownload(mediaId)
-                        }.mapCatching {
-                            YouTubeDLResponse.fromString(it)
-                        }.also { it.exceptionOrNull()?.printStackTrace() }.getOrNull()
-                        if (info?.id != mediaId) throw VideoIdMismatchException()
-                        val dlUri = runCatching { info.url?.toUri() }.getOrNull() ?: throw UnplayableException()
-                        Pair(dlUri, info.fileSize)
-                    }
-                } else {
-                    val info = runCatching {
-                        Dependencies.runDownload(mediaId)
-                    }.mapCatching {
-                        YouTubeDLResponse.fromString(it)
-                    }.also { it.exceptionOrNull()?.printStackTrace() }.getOrNull()
-                    if (info?.id != mediaId) throw VideoIdMismatchException()
-                    val dlUri = runCatching { info.url?.toUri() }.getOrNull() ?: throw UnplayableException()
-                    Pair(dlUri, info.fileSize)
+                // Use NewPipe Extractor for reliable stream resolution.
+                // It handles n-param decryption, cipher, and all YouTube obfuscation natively.
+                val (uri, contentLength) = runCatching {
+                    val streamInfo = org.schabi.newpipe.extractor.stream.StreamInfo
+                        .getInfo(ServiceList.YouTube, "https://www.youtube.com/watch?v=$mediaId")
+                    val audioStream = streamInfo.audioStreams
+                        .filter { it.torrentUrl == null }
+                        .maxByOrNull { it.averageBitrate }
+                        ?: throw UnplayableException()
+                    Pair(audioStream.content.toUri(), null as Long?)
+                }.getOrElse {
+                    it.printStackTrace()
+                    // Last resort: try raw InnerTube URL
+                    val rawUrl = youtubeFormat?.url?.takeIf { u -> u.isNotBlank() }
+                        ?: throw UnplayableException()
+                    Pair(rawUrl.toUri(), youtubeFormat?.contentLength)
                 }
 
                 val mediaItem = runCatching {

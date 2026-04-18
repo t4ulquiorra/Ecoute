@@ -6,7 +6,6 @@ plugins {
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.chaquo)
 }
 
 android {
@@ -116,33 +115,6 @@ android {
     }
 }
 
-afterEvaluate {
-    val jniLibs = file("${layout.projectDirectory}/src/main/jniLibs").also { it.mkdirs() }
-    android.buildTypes.forEach { type ->
-        val typeCapitalized = type.name.let {
-            it.first().uppercase() + it.substring(1)
-        }
-
-        tasks.named("assemble${typeCapitalized}").configure {
-            doFirst {
-                val cxxDir =
-                    file("${layout.buildDirectory.get()}/intermediates/cxx/${if (typeCapitalized == "Debug") "Debug" else "RelWithDebInfo"}")
-
-                cxxDir.walkTopDown().forEach cxx@{ f ->
-                    if (f.name != "qjs") return@cxx
-
-                    f.copyTo(
-                        target = jniLibs
-                            .resolve(f.parentFile.name)
-                            .also { it.mkdirs() }
-                            .resolve("libqjs.so"), // disguise because fuck you
-                        overwrite = true
-                    )
-                }
-            }
-        }
-    }
-}
 
 kotlin {
     jvmToolchain(libs.versions.jvm.get().toInt())
@@ -169,14 +141,6 @@ composeCompiler {
     }
 }
 
-chaquopy {
-    defaultConfig {
-        version = "3.12"
-        pip {
-            install("yt-dlp>=2026.03.17")
-            install("yt-dlp-ejs")
-            install("pip")
-        }
     }
 }
 
@@ -237,6 +201,8 @@ dependencies {
     implementation(projects.providers.translate)
     implementation(projects.core.data)
     implementation(projects.core.ui)
+
+    implementation(libs.newpipe.extractor)
 
     detektPlugins(libs.detekt.compose)
     detektPlugins(libs.detekt.formatting)
