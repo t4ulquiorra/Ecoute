@@ -562,6 +562,7 @@ object Dependencies {
         this.application = application
         // Initialize NewPipe Extractor with our HTTP downloader
         org.schabi.newpipe.extractor.NewPipe.init(com.ecoute.music.utils.NewPipeDownloader)
+        com.ecoute.music.utils.cipher.CipherDeobfuscator.initialize(application)
     }
 }
 

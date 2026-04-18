@@ -1383,8 +1383,8 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
                         ?.maxByOrNull { it.bitrate ?: 0L }
                         ?.url?.takeIf { it.isNotBlank() }
                     ?: throw UnplayableException()
-                    ?: throw UnplayableException()
-                val (uri, contentLength) = Pair(directUrl.toUri(), youtubeFormat?.contentLength)
+                val transformedUrl = kotlinx.coroutines.runBlocking(kotlinx.coroutines.Dispatchers.IO) { com.ecoute.music.utils.cipher.CipherDeobfuscator.transformNParamInUrl(directUrl) }
+                val (uri, contentLength) = Pair(transformedUrl.toUri(), youtubeFormat?.contentLength)
 
                 val mediaItem = runCatching {
                     runBlocking(Dispatchers.IO) { findMediaItem(mediaId) }
