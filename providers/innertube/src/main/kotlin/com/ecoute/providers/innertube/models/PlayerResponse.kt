@@ -41,10 +41,12 @@ data class PlayerResponse(
         val adaptiveFormats: List<AdaptiveFormat>?,
         val expiresInSeconds: Long?
     ) {
+        // Includes both plain-URL and signatureCipher formats so the
+        // URL resolver in PlayerService can handle whichever YouTube returns.
         val highestQualityFormat: AdaptiveFormat?
             get() = adaptiveFormats
-                ?.filter { it.url != null && it.signatureCipher == null }
                 ?.filter { it.mimeType.startsWith("audio/") }
+                ?.filter { it.url != null || it.signatureCipher != null }
                 ?.let { formats ->
                     formats.findLast { it.itag == 251 || it.itag == 140 }
                         ?: formats.maxBy { it.bitrate ?: 0L }

@@ -1,45 +1,24 @@
-package com.ecoute.music.service
-
-import android.app.PendingIntent
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.res.Configuration
-import android.graphics.Bitmap
-import android.graphics.Color
-import android.media.AudioDeviceCallback
-import android.media.AudioDeviceInfo
-import android.media.AudioManager
-import android.media.MediaDescription
-import android.media.MediaMetadata
-import android.media.audiofx.BassBoost
-import android.media.audiofx.LoudnessEnhancer
-import android.media.audiofx.PresetReverb
-import android.media.session.MediaSession
-import android.media.session.PlaybackState
-import android.os.Bundle
-import android.os.SystemClock
-import android.support.v4.media.session.MediaSessionCompat
-import android.text.format.DateUtils
-import androidx.annotation.OptIn
-import androidx.compose.runtime.Stable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startForegroundService
-import androidx.core.content.getSystemService
-import androidx.core.net.toUri
-import androidx.media3.common.AudioAttributes
-import androidx.media3.common.AuxEffectInfo
-import androidx.media3.common.C
-import androidx.media3.common.MediaItem
-import androidx.media3.common.PlaybackException
-import androidx.media3.common.Player
-import androidx.media3.common.Timeline
-import androidx.media3.common.audio.SonicAudioProcessor
-import androidx.media3.common.util.UnstableApi
+package com.ecoute.music.service                                                        
+import android.app.PendingIntent                                                        import android.content.BroadcastReceiver
+import android.content.Context                                                          import android.content.Intent
+import android.content.res.Configuration                                                import android.graphics.Bitmap
+import android.graphics.Color                                                           import android.media.AudioDeviceCallback
+import android.media.AudioDeviceInfo                                                    import android.media.AudioManager
+import android.media.MediaDescription                                                   import android.media.MediaMetadata
+import android.media.audiofx.BassBoost                                                  import android.media.audiofx.LoudnessEnhancer
+import android.media.audiofx.PresetReverb                                               import android.media.session.MediaSession
+import android.media.session.PlaybackState                                              import android.os.Bundle
+import android.os.SystemClock                                                           import android.support.v4.media.session.MediaSessionCompat
+import android.text.format.DateUtils                                                    import androidx.annotation.OptIn
+import androidx.compose.runtime.Stable                                                  import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf                                          import androidx.compose.runtime.setValue
+import androidx.core.app.NotificationCompat                                             import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startForegroundService                       import androidx.core.content.getSystemService
+import androidx.core.net.toUri                                                          import androidx.media3.common.AudioAttributes
+import androidx.media3.common.AuxEffectInfo                                             import androidx.media3.common.C
+import androidx.media3.common.MediaItem                                                 import androidx.media3.common.PlaybackException
+import androidx.media3.common.Player                                                    import androidx.media3.common.Timeline
+import androidx.media3.common.audio.SonicAudioProcessor                                 import androidx.media3.common.util.UnstableApi
 import androidx.media3.database.StandaloneDatabaseProvider
 import androidx.media3.datasource.DataSource
 import androidx.media3.datasource.DataSpec
@@ -1373,20 +1352,41 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
                 val body = runBlocking(Dispatchers.IO) {
                     Innertube.player(PlayerBody(videoId = mediaId))
                 }?.getOrNull()
+
                 val youtubeFormat = body?.streamingData?.highestQualityFormat
 
-                // Use NewPipe Extractor for reliable stream resolution.
-                // It handles n-param decryption, cipher, and all YouTube obfuscation natively.
-                java.io.File(context.filesDir, "url_debug.txt").writeText("FORMAT:" + youtubeFormat?.toString().orEmpty().take(300))
-                val directUrl = youtubeFormat?.url?.takeIf { it.isNotBlank() }
-                    ?: body?.streamingData?.adaptiveFormats
-                        ?.filter { it.mimeType?.startsWith("audio/") == true }
-                        ?.maxByOrNull { it.bitrate ?: 0L }
-                        ?.url?.takeIf { it.isNotBlank() }
+                // Resolve a playable URL from a format — tries plain URL first,
+                // then decodes signatureCipher if present (same as Metrolist's findUrlOrNull).
+                fun resolveUrl(url: String?, cipher: String?): String? {
+                    if (!url.isNullOrBlank()) return url
+                    if (!cipher.isNullOrBlank()) return runBlocking(Dispatchers.Main) {
+                        com.ecoute.music.utils.cipher.CipherDeobfuscator.deobfuscateStreamUrl(cipher)
+                    }
+                    return null
+                }
+
+                // All audio formats including ciphered ones, sorted best-first
+                val allAudioFormats = body?.streamingData?.adaptiveFormats
+                    ?.filter { it.mimeType?.startsWith("audio/") == true }
+                    ?.sortedByDescending { it.bitrate ?: 0L }
+
+                // Try best format first, then fall through to any other audio format
+                val resolvedFormat = youtubeFormat?.let { fmt ->
+                    resolveUrl(fmt.url, fmt.signatureCipher)?.let { url -> fmt to url }
+                } ?: allAudioFormats
+                    ?.firstNotNullOfOrNull { fmt ->
+                        resolveUrl(fmt.url, fmt.signatureCipher)?.let { url -> fmt to url }
+                    }
                     ?: throw UnplayableException()
-                val transformedUrl = kotlinx.coroutines.runBlocking(kotlinx.coroutines.Dispatchers.Main) { com.ecoute.music.utils.cipher.CipherDeobfuscator.transformNParamInUrl(directUrl) }
-                java.io.File(context.filesDir, "url_debug.txt").writeText("SAME:" + (directUrl == transformedUrl).toString() + "\nORIG:" + directUrl.take(200) + "\nTRANS:" + transformedUrl.take(200))
-                val (uri, contentLength) = Pair(transformedUrl.toUri(), youtubeFormat?.contentLength)
+
+                val directUrl = resolvedFormat.second
+                val resolvedFormatMeta = resolvedFormat.first
+
+                val transformedUrl = runBlocking(Dispatchers.Main) {
+                    com.ecoute.music.utils.cipher.CipherDeobfuscator.transformNParamInUrl(directUrl)
+                }
+
+                val (uri, contentLength) = Pair(transformedUrl.toUri(), resolvedFormatMeta.contentLength)
 
                 val mediaItem = runCatching {
                     runBlocking(Dispatchers.IO) { findMediaItem(mediaId) }
@@ -1411,12 +1411,12 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
                         Database.insert(
                             Format(
                                 songId = mediaId,
-                                itag = youtubeFormat?.itag,
-                                mimeType = youtubeFormat?.mimeType,
-                                bitrate = youtubeFormat?.bitrate,
+                                itag = resolvedFormatMeta.itag,
+                                mimeType = resolvedFormatMeta.mimeType,
+                                bitrate = resolvedFormatMeta.bitrate,
                                 loudnessDb = body?.playerConfig?.audioConfig?.normalizedLoudnessDb,
                                 contentLength = contentLength,
-                                lastModified = youtubeFormat?.lastModified
+                                lastModified = resolvedFormatMeta.lastModified
                             )
                         )
                     }

@@ -1,5 +1,5 @@
 package com.ecoute.music.utils.cipher
-
+                                                                                   
 import android.content.Context
 import android.net.Uri
 import android.util.Log
@@ -18,6 +18,30 @@ object CipherDeobfuscator {
     fun initialize(context: Context) {
         appContext = context.applicationContext
         Log.d(TAG, "CipherDeobfuscator initialized")
+    }
+
+    /**
+     * Decodes a signatureCipher string (the "s=...&sp=...&url=..." format YouTube returns)
+     * into a playable stream URL by deobfuscating the signature via the player JS.
+     */
+    suspend fun deobfuscateStreamUrl(signatureCipher: String): String? {
+        return try {
+            val params = signatureCipher.split("&").associate {
+                val idx = it.indexOf('=')
+                if (idx < 0) it to "" else it.substring(0, idx) to Uri.decode(it.substring(idx + 1))
+            }
+            val obfuscatedSig = params["s"] ?: return null
+            val sigParam = params["sp"] ?: "sig"
+            val url = params["url"] ?: return null
+            val webView = getOrCreateWebView(forceRefresh = false) ?: return null
+            if (!webView.sigFunctionAvailable) return null
+            val deobfuscatedSig = webView.deobfuscateSignature(obfuscatedSig)
+            val separator = if ("?" in url) "&" else "?"
+            "$url${separator}${sigParam}=${Uri.encode(deobfuscatedSig)}"
+        } catch (e: Exception) {
+            Log.e(TAG, "deobfuscateStreamUrl failed", e)
+            null
+        }
     }
 
     suspend fun transformNParamInUrl(url: String): String {
