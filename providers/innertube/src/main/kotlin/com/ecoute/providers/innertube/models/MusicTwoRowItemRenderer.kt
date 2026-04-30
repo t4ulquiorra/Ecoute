@@ -1,26 +1,86 @@
 package com.ecoute.providers.innertube.models
 
+import com.ecoute.providers.innertube.models.BrowseEndpoint.BrowseEndpointContextSupportedConfigs.BrowseEndpointContextMusicConfig.Companion.MUSIC_PAGE_TYPE_ALBUM
+import com.ecoute.providers.innertube.models.BrowseEndpoint.BrowseEndpointContextSupportedConfigs.BrowseEndpointContextMusicConfig.Companion.MUSIC_PAGE_TYPE_ARTIST
+import com.ecoute.providers.innertube.models.BrowseEndpoint.BrowseEndpointContextSupportedConfigs.BrowseEndpointContextMusicConfig.Companion.MUSIC_PAGE_TYPE_AUDIOBOOK
+import com.ecoute.providers.innertube.models.BrowseEndpoint.BrowseEndpointContextSupportedConfigs.BrowseEndpointContextMusicConfig.Companion.MUSIC_PAGE_TYPE_NON_MUSIC_AUDIO_TRACK_PAGE
+import com.ecoute.providers.innertube.models.BrowseEndpoint.BrowseEndpointContextSupportedConfigs.BrowseEndpointContextMusicConfig.Companion.MUSIC_PAGE_TYPE_PLAYLIST
+import com.ecoute.providers.innertube.models.BrowseEndpoint.BrowseEndpointContextSupportedConfigs.BrowseEndpointContextMusicConfig.Companion.MUSIC_PAGE_TYPE_PODCAST_SHOW_DETAIL_PAGE
+import com.ecoute.providers.innertube.models.BrowseEndpoint.BrowseEndpointContextSupportedConfigs.BrowseEndpointContextMusicConfig.Companion.MUSIC_PAGE_TYPE_USER_CHANNEL
 import kotlinx.serialization.Serializable
 
+/**
+ * Two row: a big thumbnail, a title, and a subtitle
+ * Used in [GridRenderer] and [MusicCarouselShelfRenderer]
+ * Item type: song, video, album, playlist, artist
+ */
 @Serializable
 data class MusicTwoRowItemRenderer(
-    val navigationEndpoint: NavigationEndpoint?,
-    val thumbnailRenderer: ThumbnailRenderer?,
-    val title: Runs?,
+    val title: Runs,
     val subtitle: Runs?,
-    val thumbnailOverlay: ThumbnailOverlay?
+    val subtitleBadges: List<Badges>?,
+    val menu: Menu?,
+    val thumbnailRenderer: ThumbnailRenderer,
+    val navigationEndpoint: NavigationEndpoint,
+    val thumbnailOverlay: MusicResponsiveListItemRenderer.Overlay?,
 ) {
+    val isSong: Boolean
+        get() = navigationEndpoint.endpoint is WatchEndpoint
     val isPlaylist: Boolean
-        get() = navigationEndpoint?.browseEndpoint?.browseEndpointContextSupportedConfigs
-            ?.browseEndpointContextMusicConfig?.pageType == "MUSIC_PAGE_TYPE_PLAYLIST"
-
+        get() =
+            navigationEndpoint.browseEndpoint
+                ?.browseEndpointContextSupportedConfigs
+                ?.browseEndpointContextMusicConfig
+                ?.pageType ==
+                MUSIC_PAGE_TYPE_PLAYLIST
     val isAlbum: Boolean
-        get() = navigationEndpoint?.browseEndpoint?.browseEndpointContextSupportedConfigs
-            ?.browseEndpointContextMusicConfig?.pageType == "MUSIC_PAGE_TYPE_ALBUM" ||
-            navigationEndpoint?.browseEndpoint?.browseEndpointContextSupportedConfigs
-                ?.browseEndpointContextMusicConfig?.pageType == "MUSIC_PAGE_TYPE_AUDIOBOOK"
-
+        get() =
+            navigationEndpoint.browseEndpoint
+                ?.browseEndpointContextSupportedConfigs
+                ?.browseEndpointContextMusicConfig
+                ?.pageType ==
+                MUSIC_PAGE_TYPE_ALBUM ||
+                navigationEndpoint.browseEndpoint
+                    ?.browseEndpointContextSupportedConfigs
+                    ?.browseEndpointContextMusicConfig
+                    ?.pageType ==
+                MUSIC_PAGE_TYPE_AUDIOBOOK
     val isArtist: Boolean
-        get() = navigationEndpoint?.browseEndpoint?.browseEndpointContextSupportedConfigs
-            ?.browseEndpointContextMusicConfig?.pageType == "MUSIC_PAGE_TYPE_ARTIST"
+        get() =
+            navigationEndpoint.browseEndpoint
+                ?.browseEndpointContextSupportedConfigs
+                ?.browseEndpointContextMusicConfig
+                ?.pageType ==
+                MUSIC_PAGE_TYPE_ARTIST
+    val isPodcast: Boolean
+        get() =
+            navigationEndpoint.browseEndpoint
+                ?.browseEndpointContextSupportedConfigs
+                ?.browseEndpointContextMusicConfig
+                ?.pageType ==
+                MUSIC_PAGE_TYPE_PODCAST_SHOW_DETAIL_PAGE
+    val isUserChannel: Boolean
+        get() =
+            navigationEndpoint.browseEndpoint
+                ?.browseEndpointContextSupportedConfigs
+                ?.browseEndpointContextMusicConfig
+                ?.pageType ==
+                MUSIC_PAGE_TYPE_USER_CHANNEL
+    val isEpisode: Boolean
+        get() =
+            navigationEndpoint.browseEndpoint
+                ?.browseEndpointContextSupportedConfigs
+                ?.browseEndpointContextMusicConfig
+                ?.pageType ==
+                MUSIC_PAGE_TYPE_NON_MUSIC_AUDIO_TRACK_PAGE
+
+    val musicVideoType: String?
+        get() =
+            thumbnailOverlay
+                ?.musicItemThumbnailOverlayRenderer
+                ?.content
+                ?.musicPlayButtonRenderer
+                ?.playNavigationEndpoint
+                ?.musicVideoType
+                ?: navigationEndpoint.musicVideoType
 }
