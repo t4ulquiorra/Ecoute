@@ -27,6 +27,7 @@ detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
 [libraries]
 newpipe_extractor = { module = "com.github.TeamNewPipe:NewPipeExtractor", version = "v0.24.2" }
+metrolist_extractor = { module = "com.github.MetrolistGroup:MetrolistExtractor", version = "6305155" }
 
 core_ktx = { module = "androidx.core:core-ktx", version = "1.18.0" }
 
