@@ -34,12 +34,3 @@ infix operator fun <T : Innertube.Item> Innertube.ItemsPage<T>?.plus(other: Inne
             ?.distinctBy(Innertube.Item::key),
         continuation = other.continuation ?: this?.continuation
     )
-
-fun String.parseTime(): Int? {
-    val parts = trim().split(":").map { it.toIntOrNull() ?: return null }
-    return when (parts.size) {
-        2 -> parts[0] * 60 + parts[1]
-        3 -> parts[0] * 3600 + parts[1] * 60 + parts[2]
-        else -> null
-    }
-}
