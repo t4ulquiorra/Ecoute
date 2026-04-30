@@ -64,9 +64,9 @@ suspend fun Innertube.player(
     tryContexts(
         body = body,
         checkIsValid = checkIsValid,
-	Context.DefaultAndroidMusic,
-        Context.DefaultWeb,
         Context.DefaultIOS,
-        Context.DefaultTV
+        Context.DefaultTV,
+	Context.DefaultWeb,
+	Context.DefaultAndroidMusic,
     )
 }
