@@ -55,7 +55,7 @@ private suspend fun Innertube.tryContexts(
 
 private val PlayerResponse.isValid
     get() = playabilityStatus?.status == "OK" &&
-        streamingData?.adaptiveFormats?.any { it.url != null || it.signatureCipher != null } == true
+        streamingData?.adaptiveFormats?.any { it.url != null } == true
 
 suspend fun Innertube.player(
     body: PlayerBody,
@@ -64,9 +64,9 @@ suspend fun Innertube.player(
     tryContexts(
         body = body,
         checkIsValid = checkIsValid,
+	Context.DefaultAndroidMusic,
         Context.DefaultWeb,
         Context.DefaultIOS,
-        Context.DefaultAndroidMusic,
         Context.DefaultTV
     )
 }
