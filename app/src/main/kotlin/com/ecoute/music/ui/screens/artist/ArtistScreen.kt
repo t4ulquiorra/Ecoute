@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.valentinilk.shimmer.shimmer
 import com.ecoute.compose.persist.PersistMapCleanup
 import com.ecoute.compose.persist.persist
-import com.ecoute.innertube.Innertube
+import com.ecoute.innertube.YouTube
 import com.ecoute.innertube.models.bodies.BrowseBody
 import com.ecoute.innertube.models.bodies.ContinuationBody
 import com.ecoute.innertube.requests.artistPage
@@ -70,7 +70,7 @@ fun ArtistScreen(browseId: String) {
 
     var artist by persist<Artist?>("artist/$browseId/artist")
 
-    var artistPage by persist<Innertube.ArtistPage?>("artist/$browseId/artistPage")
+    var artistPage by persist<YouTube.ArtistPage?>("artist/$browseId/artistPage")
 
     LaunchedEffect(Unit) {
         Database
@@ -82,7 +82,7 @@ fun ArtistScreen(browseId: String) {
 
                 if (artistPage == null && (currentArtist?.timestamp == null || mustFetch)) {
                     withContext(Dispatchers.IO) {
-                        Innertube.artistPage(BrowseBody(browseId = browseId))
+                        YouTube.artistPage(BrowseBody(browseId = browseId))
                             ?.onSuccess { currentArtistPage ->
                                 artistPage = currentArtistPage
 
@@ -207,24 +207,24 @@ fun ArtistScreen(browseId: String) {
                                 itemsPageProvider = artistPage?.let {
                                     ({ continuation ->
                                         continuation?.let {
-                                            Innertube.itemsPage(
+                                            YouTube.itemsPage(
                                                 body = ContinuationBody(continuation = continuation),
-                                                fromMusicResponsiveListItemRenderer = Innertube.SongItem::from,
+                                                fromMusicResponsiveListItemRenderer = YouTube.SongItem::from,
                                             )
                                         } ?: artistPage
                                             ?.songsEndpoint
                                             ?.takeIf { it.browseId != null }
                                             ?.let { endpoint ->
-                                                Innertube.itemsPage(
+                                                YouTube.itemsPage(
                                                     body = BrowseBody(
                                                         browseId = endpoint.browseId!!,
                                                         params = endpoint.params,
                                                     ),
-                                                    fromMusicResponsiveListItemRenderer = Innertube.SongItem::from,
+                                                    fromMusicResponsiveListItemRenderer = YouTube.SongItem::from,
                                                 )
                                             }
                                         ?: Result.success(
-                                            Innertube.ItemsPage(
+                                            YouTube.ItemsPage(
                                                 items = artistPage?.songs,
                                                 continuation = null
                                             )
@@ -271,24 +271,24 @@ fun ArtistScreen(browseId: String) {
                                 itemsPageProvider = artistPage?.let {
                                     ({ continuation ->
                                         continuation?.let {
-                                            Innertube.itemsPage(
+                                            YouTube.itemsPage(
                                                 body = ContinuationBody(continuation = continuation),
-                                                fromMusicTwoRowItemRenderer = Innertube.AlbumItem::from,
+                                                fromMusicTwoRowItemRenderer = YouTube.AlbumItem::from,
                                             )
                                         } ?: artistPage
                                             ?.albumsEndpoint
                                             ?.takeIf { it.browseId != null }
                                             ?.let { endpoint ->
-                                                Innertube.itemsPage(
+                                                YouTube.itemsPage(
                                                     body = BrowseBody(
                                                         browseId = endpoint.browseId!!,
                                                         params = endpoint.params,
                                                     ),
-                                                    fromMusicTwoRowItemRenderer = Innertube.AlbumItem::from,
+                                                    fromMusicTwoRowItemRenderer = YouTube.AlbumItem::from,
                                                 )
                                             }
                                         ?: Result.success(
-                                            Innertube.ItemsPage(
+                                            YouTube.ItemsPage(
                                                 items = artistPage?.albums,
                                                 continuation = null
                                             )
@@ -321,24 +321,24 @@ fun ArtistScreen(browseId: String) {
                                 itemsPageProvider = artistPage?.let {
                                     ({ continuation ->
                                         continuation?.let {
-                                            Innertube.itemsPage(
+                                            YouTube.itemsPage(
                                                 body = ContinuationBody(continuation = continuation),
-                                                fromMusicTwoRowItemRenderer = Innertube.AlbumItem::from,
+                                                fromMusicTwoRowItemRenderer = YouTube.AlbumItem::from,
                                             )
                                         } ?: artistPage
                                             ?.singlesEndpoint
                                             ?.takeIf { it.browseId != null }
                                             ?.let { endpoint ->
-                                                Innertube.itemsPage(
+                                                YouTube.itemsPage(
                                                     body = BrowseBody(
                                                         browseId = endpoint.browseId!!,
                                                         params = endpoint.params,
                                                     ),
-                                                    fromMusicTwoRowItemRenderer = Innertube.AlbumItem::from,
+                                                    fromMusicTwoRowItemRenderer = YouTube.AlbumItem::from,
                                                 )
                                             }
                                         ?: Result.success(
-                                            Innertube.ItemsPage(
+                                            YouTube.ItemsPage(
                                                 items = artistPage?.singles,
                                                 continuation = null
                                             )

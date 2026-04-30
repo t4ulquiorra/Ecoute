@@ -26,12 +26,12 @@ import com.ecoute.music.utils.medium
 import com.ecoute.music.utils.secondary
 import com.ecoute.music.utils.semiBold
 import com.ecoute.music.utils.thumbnail
-import com.ecoute.innertube.Innertube
+import com.ecoute.innertube.YouTube
 import com.ecoute.music.models.Song
 
 @Composable
 fun SongItem(
-    song: Innertube.SongItem,
+    song: YouTube.SongItem,
     thumbnailSizePx: Int,
     thumbnailSizeDp: Dp,
     modifier: Modifier = Modifier

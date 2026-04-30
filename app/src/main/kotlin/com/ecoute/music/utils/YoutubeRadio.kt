@@ -1,7 +1,7 @@
 package com.ecoute.music.utils
 
 import androidx.media3.common.MediaItem
-import com.ecoute.innertube.Innertube
+import com.ecoute.innertube.YouTube
 import com.ecoute.innertube.models.bodies.ContinuationBody
 import com.ecoute.innertube.models.bodies.NextBody
 import com.ecoute.innertube.requests.nextPage
@@ -23,7 +23,7 @@ data class YouTubeRadio(
             val continuation = nextContinuation
 
             if (continuation == null) {
-               Innertube.nextPage(
+               YouTube.nextPage(
                     NextBody(
                         videoId = videoId,
                         playlistId = playlistId,
@@ -38,9 +38,9 @@ data class YouTubeRadio(
                     nextResult.itemsPage
                 }
             } else {
-                Innertube.nextPage(ContinuationBody(continuation = continuation))
+                YouTube.nextPage(ContinuationBody(continuation = continuation))
             }?.getOrNull()?.let { songsPage ->
-                mediaItems = songsPage.items?.map(Innertube.SongItem::asMediaItem)
+                mediaItems = songsPage.items?.map(YouTube.SongItem::asMediaItem)
                 songsPage.continuation?.takeUnless { nextContinuation == it }
             }
 

@@ -20,7 +20,7 @@ import com.ecoute.music.ui.styling.shimmer
 import com.ecoute.music.utils.secondary
 import com.ecoute.music.utils.semiBold
 import com.ecoute.music.utils.thumbnail
-import com.ecoute.innertube.Innertube
+import com.ecoute.innertube.YouTube
 
 @Composable
 fun AlbumItem(
@@ -44,7 +44,7 @@ fun AlbumItem(
 
 @Composable
 fun AlbumItem(
-    album: Innertube.AlbumItem,
+    album: YouTube.AlbumItem,
     thumbnailSizePx: Int,
     thumbnailSizeDp: Dp,
     modifier: Modifier = Modifier,

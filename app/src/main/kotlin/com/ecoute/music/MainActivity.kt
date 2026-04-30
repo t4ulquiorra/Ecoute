@@ -60,7 +60,7 @@ import com.valentinilk.shimmer.LocalShimmerTheme
 import com.valentinilk.shimmer.defaultShimmerTheme
 import com.ecoute.compose.persist.PersistMap
 import com.ecoute.compose.persist.PersistMapOwner
-import com.ecoute.innertube.Innertube
+import com.ecoute.innertube.YouTube
 import com.ecoute.innertube.models.bodies.BrowseBody
 import com.ecoute.innertube.requests.playlistPage
 import com.ecoute.innertube.requests.song
@@ -423,7 +423,7 @@ class MainActivity : ComponentActivity(), PersistMapOwner {
                     val browseId = "VL$playlistId"
 
                     if (playlistId.startsWith("OLAK5uy_")) {
-                        Innertube.playlistPage(BrowseBody(browseId = browseId))?.getOrNull()?.let {
+                        YouTube.playlistPage(BrowseBody(browseId = browseId))?.getOrNull()?.let {
                             it.songsPage?.items?.firstOrNull()?.album?.endpoint?.browseId?.let { browseId ->
                                 albumRoute.ensureGlobal(browseId)
                             }
@@ -442,7 +442,7 @@ class MainActivity : ComponentActivity(), PersistMapOwner {
                     uri.host == "youtu.be" -> path
                     else -> null
                 }?.let { videoId ->
-                    Innertube.song(videoId)?.getOrNull()?.let { song ->
+                    YouTube.song(videoId)?.getOrNull()?.let { song ->
                         val binder = snapshotFlow { binder }.filterNotNull().first()
                         withContext(Dispatchers.Main) {
                             binder.player.forcePlay(song.asMediaItem)

@@ -24,7 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.ecoute.compose.persist.persist
-import com.ecoute.innertube.Innertube
+import com.ecoute.innertube.YouTube
 import com.ecoute.innertube.models.bodies.BrowseBody
 import com.ecoute.innertube.requests.playlistPage
 import com.ecoute.compose.reordering.ReorderingLazyColumn
@@ -185,7 +185,7 @@ fun LocalPlaylistSongs(
                                                 transaction {
                                                     runBlocking(Dispatchers.IO) {
                                                         withContext(Dispatchers.IO) {
-                                                            Innertube.playlistPage(BrowseBody(browseId = browseId))
+                                                            YouTube.playlistPage(BrowseBody(browseId = browseId))
                                                                 ?.completed()
                                                         }
                                                     }?.getOrNull()?.let { remotePlaylist ->
@@ -193,7 +193,7 @@ fun LocalPlaylistSongs(
 
                                                         remotePlaylist.songsPage
                                                             ?.items
-                                                            ?.map(Innertube.SongItem::asMediaItem)
+                                                            ?.map(YouTube.SongItem::asMediaItem)
                                                             ?.onEach(Database::insert)
                                                             ?.mapIndexed { position, mediaItem ->
                                                                 SongPlaylistMap(

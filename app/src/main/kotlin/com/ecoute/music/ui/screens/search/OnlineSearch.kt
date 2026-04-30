@@ -45,7 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.ecoute.compose.persist.persist
 import com.ecoute.compose.persist.persistList
-import com.ecoute.innertube.Innertube
+import com.ecoute.innertube.YouTube
 import com.ecoute.innertube.models.bodies.SearchSuggestionsBody
 import com.ecoute.innertube.requests.searchSuggestions
 import com.ecoute.music.Database
@@ -95,7 +95,7 @@ fun OnlineSearch(
         if (textFieldValue.text.isNotEmpty()) {
             delay(200)
             suggestionsResult =
-                Innertube.searchSuggestions(SearchSuggestionsBody(input = textFieldValue.text))
+                YouTube.searchSuggestions(SearchSuggestionsBody(input = textFieldValue.text))
         }
     }
 

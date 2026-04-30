@@ -49,7 +49,7 @@ import androidx.compose.ui.unit.dp
 import androidx.media3.common.C
 import androidx.media3.common.MediaMetadata
 import com.valentinilk.shimmer.shimmer
-import com.ecoute.innertube.Innertube
+import com.ecoute.innertube.YouTube
 import com.ecoute.innertube.models.bodies.NextBody
 import com.ecoute.innertube.requests.lyrics
 import com.ecoute.kugou.KuGou
@@ -149,7 +149,7 @@ fun Lyrics(
                             isError = true
                         }
                     } else if (!isShowingSynchronizedLyrics && it?.fixed == null) {
-                        Innertube.lyrics(NextBody(videoId = mediaId))?.onSuccess { fixedLyrics ->
+                        YouTube.lyrics(NextBody(videoId = mediaId))?.onSuccess { fixedLyrics ->
                             Database.upsert(
                                 Lyrics(
                                     songId = mediaId,

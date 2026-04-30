@@ -5,38 +5,29 @@ plugins {
 }
 
 android {
-    namespace = "com.ecoute.innertube"
+    namespace = "com.metrolist.innertube"
     compileSdk = 34
+
     defaultConfig {
         minSdk = 26
     }
 
     compileOptions {
-        isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
-}
 
-kotlin {
-    jvmToolchain(11)
+    kotlinOptions {
+        jvmTarget = "17"
+    }
 }
 
 dependencies {
-    implementation(libs.ktor.client.core)
-    implementation(libs.ktor.client.cio)
-    implementation(libs.ktor.client.content.negotiation)
-    implementation(libs.ktor.client.encoding)
-    implementation(libs.ktor.serialization.json)
-    implementation(libs.brotli)
-    implementation(libs.newpipeextractor)
-    implementation(libs.timber)
-    testImplementation(testLibs.junit)
-    coreLibraryDesugaring(libs.desugaring)
-}
-
-configurations.all {
-    resolutionStrategy {
-        force("org.mozilla:rhino:1.7.15")
-    }
+    implementation(project(":metroproto"))
+    implementation("io.ktor:ktor-client-android:2.3.11")
+    implementation("io.ktor:ktor-client-content-negotiation:2.3.11")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.11")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+    implementation("org.jsoup:jsoup:1.17.2")
 }

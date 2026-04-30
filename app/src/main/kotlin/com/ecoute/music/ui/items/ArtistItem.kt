@@ -22,7 +22,7 @@ import com.ecoute.music.ui.styling.shimmer
 import com.ecoute.music.utils.secondary
 import com.ecoute.music.utils.semiBold
 import com.ecoute.music.utils.thumbnail
-import com.ecoute.innertube.Innertube
+import com.ecoute.innertube.YouTube
 
 @Composable
 fun ArtistItem(
@@ -45,7 +45,7 @@ fun ArtistItem(
 
 @Composable
 fun ArtistItem(
-    artist: Innertube.ArtistItem,
+    artist: YouTube.ArtistItem,
     thumbnailSizePx: Int,
     thumbnailSizeDp: Dp,
     modifier: Modifier = Modifier,

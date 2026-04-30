@@ -26,7 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.ecoute.innertube.Innertube
+import com.ecoute.innertube.YouTube
 import com.ecoute.innertube.models.NavigationEndpoint
 import com.ecoute.music.LocalPlayerAwareWindowInsets
 import com.ecoute.music.LocalPlayerServiceBinder
@@ -56,7 +56,7 @@ import com.ecoute.music.utils.semiBold
 @ExperimentalAnimationApi
 @Composable
 fun ArtistOverview(
-    youtubeArtistPage: Innertube.ArtistPage?,
+    youtubeArtistPage: YouTube.ArtistPage?,
     onViewAllSongsClick: () -> Unit,
     onViewAllAlbumsClick: () -> Unit,
     onViewAllSinglesClick: () -> Unit,
@@ -200,7 +200,7 @@ fun ArtistOverview(
                         ) {
                             items(
                                 items = albums,
-                                key = Innertube.AlbumItem::key
+                                key = YouTube.AlbumItem::key
                             ) { album ->
                                 AlbumItem(
                                     album = album,
@@ -245,7 +245,7 @@ fun ArtistOverview(
                         ) {
                             items(
                                 items = singles,
-                                key = Innertube.AlbumItem::key
+                                key = YouTube.AlbumItem::key
                             ) { album ->
                                 AlbumItem(
                                     album = album,

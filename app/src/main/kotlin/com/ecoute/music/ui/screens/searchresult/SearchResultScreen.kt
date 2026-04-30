@@ -13,7 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.ecoute.compose.persist.PersistMapCleanup
 import com.ecoute.compose.persist.persistMap
-import com.ecoute.innertube.Innertube
+import com.ecoute.innertube.YouTube
 import com.ecoute.innertube.models.bodies.ContinuationBody
 import com.ecoute.innertube.models.bodies.SearchBody
 import com.ecoute.innertube.requests.searchPage
@@ -103,14 +103,14 @@ fun SearchResultScreen(query: String, onSearchAgain: () -> Unit) {
                                 tag = "searchResults/$query/songs",
                                 itemsPageProvider = { continuation ->
                                     if (continuation == null) {
-                                        Innertube.searchPage(
-                                            body = SearchBody(query = query, params = Innertube.SearchFilter.Song.value),
-                                            fromMusicShelfRendererContent = Innertube.SongItem.Companion::from
+                                        YouTube.searchPage(
+                                            body = SearchBody(query = query, params = YouTube.SearchFilter.Song.value),
+                                            fromMusicShelfRendererContent = YouTube.SongItem.Companion::from
                                         )
                                     } else {
-                                        Innertube.searchPage(
+                                        YouTube.searchPage(
                                             body = ContinuationBody(continuation = continuation),
-                                            fromMusicShelfRendererContent = Innertube.SongItem.Companion::from
+                                            fromMusicShelfRendererContent = YouTube.SongItem.Companion::from
                                         )
                                     }
                                 },
@@ -153,14 +153,14 @@ fun SearchResultScreen(query: String, onSearchAgain: () -> Unit) {
                                 tag = "searchResults/$query/albums",
                                 itemsPageProvider = { continuation ->
                                     if (continuation == null) {
-                                        Innertube.searchPage(
-                                            body = SearchBody(query = query, params = Innertube.SearchFilter.Album.value),
-                                            fromMusicShelfRendererContent = Innertube.AlbumItem::from
+                                        YouTube.searchPage(
+                                            body = SearchBody(query = query, params = YouTube.SearchFilter.Album.value),
+                                            fromMusicShelfRendererContent = YouTube.AlbumItem::from
                                         )
                                     } else {
-                                        Innertube.searchPage(
+                                        YouTube.searchPage(
                                             body = ContinuationBody(continuation = continuation),
-                                            fromMusicShelfRendererContent = Innertube.AlbumItem::from
+                                            fromMusicShelfRendererContent = YouTube.AlbumItem::from
                                         )
                                     }
                                 },
@@ -190,14 +190,14 @@ fun SearchResultScreen(query: String, onSearchAgain: () -> Unit) {
                                 tag = "searchResults/$query/artists",
                                 itemsPageProvider = { continuation ->
                                     if (continuation == null) {
-                                        Innertube.searchPage(
-                                            body = SearchBody(query = query, params = Innertube.SearchFilter.Artist.value),
-                                            fromMusicShelfRendererContent = Innertube.ArtistItem::from
+                                        YouTube.searchPage(
+                                            body = SearchBody(query = query, params = YouTube.SearchFilter.Artist.value),
+                                            fromMusicShelfRendererContent = YouTube.ArtistItem::from
                                         )
                                     } else {
-                                        Innertube.searchPage(
+                                        YouTube.searchPage(
                                             body = ContinuationBody(continuation = continuation),
-                                            fromMusicShelfRendererContent = Innertube.ArtistItem::from
+                                            fromMusicShelfRendererContent = YouTube.ArtistItem::from
                                         )
                                     }
                                 },
@@ -228,14 +228,14 @@ fun SearchResultScreen(query: String, onSearchAgain: () -> Unit) {
                                 tag = "searchResults/$query/videos",
                                 itemsPageProvider = { continuation ->
                                     if (continuation == null) {
-                                        Innertube.searchPage(
-                                            body = SearchBody(query = query, params = Innertube.SearchFilter.Video.value),
-                                            fromMusicShelfRendererContent = Innertube.VideoItem::from
+                                        YouTube.searchPage(
+                                            body = SearchBody(query = query, params = YouTube.SearchFilter.Video.value),
+                                            fromMusicShelfRendererContent = YouTube.VideoItem::from
                                         )
                                     } else {
-                                        Innertube.searchPage(
+                                        YouTube.searchPage(
                                             body = ContinuationBody(continuation = continuation),
-                                            fromMusicShelfRendererContent = Innertube.VideoItem::from
+                                            fromMusicShelfRendererContent = YouTube.VideoItem::from
                                         )
                                     }
                                 },
@@ -282,19 +282,19 @@ fun SearchResultScreen(query: String, onSearchAgain: () -> Unit) {
                                 itemsPageProvider = { continuation ->
                                     if (continuation == null) {
                                         val filter = if (tabIndex == 4) {
-                                            Innertube.SearchFilter.CommunityPlaylist
+                                            YouTube.SearchFilter.CommunityPlaylist
                                         } else {
-                                            Innertube.SearchFilter.FeaturedPlaylist
+                                            YouTube.SearchFilter.FeaturedPlaylist
                                         }
 
-                                        Innertube.searchPage(
+                                        YouTube.searchPage(
                                             body = SearchBody(query = query, params = filter.value),
-                                            fromMusicShelfRendererContent = Innertube.PlaylistItem::from
+                                            fromMusicShelfRendererContent = YouTube.PlaylistItem::from
                                         )
                                     } else {
-                                        Innertube.searchPage(
+                                        YouTube.searchPage(
                                             body = ContinuationBody(continuation = continuation),
-                                            fromMusicShelfRendererContent = Innertube.PlaylistItem::from
+                                            fromMusicShelfRendererContent = YouTube.PlaylistItem::from
                                         )
                                     }
                                 },

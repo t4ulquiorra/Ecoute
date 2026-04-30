@@ -27,7 +27,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.media3.datasource.cache.Cache
 import androidx.media3.datasource.cache.CacheSpan
-import com.ecoute.innertube.Innertube
+import com.ecoute.innertube.YouTube
 import com.ecoute.innertube.models.bodies.PlayerBody
 import com.ecoute.innertube.requests.player
 import com.ecoute.music.Database
@@ -75,7 +75,7 @@ fun StatsForNerds(
                     binder.player.currentMediaItem?.takeIf { it.mediaId == mediaId }?.let { mediaItem ->
                         withContext(Dispatchers.IO) {
                             delay(2000)
-                            Innertube.player(PlayerBody(videoId = mediaId))?.onSuccess { response ->
+                            YouTube.player(PlayerBody(videoId = mediaId))?.onSuccess { response ->
                                 response.streamingData?.highestQualityFormat?.let { format ->
                                     Database.insert(mediaItem)
                                     Database.insert(

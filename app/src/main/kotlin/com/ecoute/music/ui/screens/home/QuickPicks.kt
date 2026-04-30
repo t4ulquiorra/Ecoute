@@ -39,7 +39,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.ecoute.compose.persist.persist
-import com.ecoute.innertube.Innertube
+import com.ecoute.innertube.YouTube
 import com.ecoute.innertube.models.NavigationEndpoint
 import com.ecoute.innertube.models.bodies.NextBody
 import com.ecoute.innertube.requests.relatedPage
@@ -91,13 +91,13 @@ fun QuickPicks(
 
     var trending by persist<Song?>("home/trending")
 
-    var relatedPageResult by persist<Result<Innertube.RelatedPage?>?>(tag = "home/relatedPageResult")
+    var relatedPageResult by persist<Result<YouTube.RelatedPage?>?>(tag = "home/relatedPageResult")
 
     LaunchedEffect(Unit) {
         Database.trending().distinctUntilChanged().collect { song ->
             if ((song == null && relatedPageResult == null) || trending?.id != song?.id) {
                 relatedPageResult =
-                    Innertube.relatedPage(NextBody(videoId = (song?.id ?: "J7p4bzqLvCw")))
+                    YouTube.relatedPage(NextBody(videoId = (song?.id ?: "J7p4bzqLvCw")))
             }
             trending = song
         }
@@ -215,7 +215,7 @@ fun QuickPicks(
                     items(
                         items = related.songs?.dropLast(if (trending == null) 0 else 1)
                             ?: emptyList(),
-                        key = Innertube.SongItem::key
+                        key = YouTube.SongItem::key
                     ) { song ->
                         SongItem(
                             song = song,
@@ -256,7 +256,7 @@ fun QuickPicks(
                     LazyRow(contentPadding = endPaddingValues) {
                         items(
                             items = albums,
-                            key = Innertube.AlbumItem::key
+                            key = YouTube.AlbumItem::key
                         ) { album ->
                             AlbumItem(
                                 album = album,
@@ -280,7 +280,7 @@ fun QuickPicks(
                     LazyRow(contentPadding = endPaddingValues) {
                         items(
                             items = artists,
-                            key = Innertube.ArtistItem::key,
+                            key = YouTube.ArtistItem::key,
                         ) { artist ->
                             ArtistItem(
                                 artist = artist,
@@ -306,7 +306,7 @@ fun QuickPicks(
                     LazyRow(contentPadding = endPaddingValues) {
                         items(
                             items = playlists,
-                            key = Innertube.PlaylistItem::key,
+                            key = YouTube.PlaylistItem::key,
                         ) { playlist ->
                             PlaylistItem(
                                 playlist = playlist,

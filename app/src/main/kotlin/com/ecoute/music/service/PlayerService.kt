@@ -67,7 +67,7 @@ import androidx.media3.exoplayer.source.MediaSource
 import androidx.media3.extractor.ExtractorsFactory
 import androidx.media3.extractor.mkv.MatroskaExtractor
 import androidx.media3.extractor.mp4.FragmentedMp4Extractor
-import com.ecoute.innertube.Innertube
+import com.ecoute.innertube.YouTube
 import com.ecoute.innertube.models.NavigationEndpoint
 import com.ecoute.innertube.models.bodies.PlayerBody
 import com.ecoute.innertube.requests.player

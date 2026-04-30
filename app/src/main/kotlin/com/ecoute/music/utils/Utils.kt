@@ -7,13 +7,13 @@ import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
-import com.ecoute.innertube.Innertube
+import com.ecoute.innertube.YouTube
 import com.ecoute.innertube.models.bodies.ContinuationBody
 import com.ecoute.innertube.requests.playlistPage
 import com.ecoute.innertube.utils.plus
 import com.ecoute.music.models.Song
 
-val Innertube.SongItem.asMediaItem: MediaItem
+val YouTube.SongItem.asMediaItem: MediaItem
     get() = MediaItem.Builder()
         .setMediaId(key)
         .setUri(key)
@@ -36,7 +36,7 @@ val Innertube.SongItem.asMediaItem: MediaItem
         )
         .build()
 
-val Innertube.VideoItem.asMediaItem: MediaItem
+val YouTube.VideoItem.asMediaItem: MediaItem
     get() = MediaItem.Builder()
         .setMediaId(key)
         .setUri(key)
@@ -90,12 +90,12 @@ fun Uri?.thumbnail(size: Int): Uri? {
 
 fun formatAsDuration(millis: Long) = DateUtils.formatElapsedTime(millis / 1000).removePrefix("0")
 
-suspend fun Result<Innertube.PlaylistOrAlbumPage>.completed(): Result<Innertube.PlaylistOrAlbumPage>? {
+suspend fun Result<YouTube.PlaylistOrAlbumPage>.completed(): Result<YouTube.PlaylistOrAlbumPage>? {
     var playlistPage = getOrNull() ?: return null
 
     while (playlistPage.songsPage?.continuation != null) {
         val continuation = playlistPage.songsPage?.continuation!!
-        val otherPlaylistPageResult = Innertube.playlistPage(ContinuationBody(continuation = continuation)) ?: break
+        val otherPlaylistPageResult = YouTube.playlistPage(ContinuationBody(continuation = continuation)) ?: break
 
         if (otherPlaylistPageResult.isFailure) break
 

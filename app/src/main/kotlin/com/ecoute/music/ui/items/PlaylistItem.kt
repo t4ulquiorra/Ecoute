@@ -39,7 +39,7 @@ import com.ecoute.music.utils.medium
 import com.ecoute.music.utils.secondary
 import com.ecoute.music.utils.semiBold
 import com.ecoute.music.utils.thumbnail
-import com.ecoute.innertube.Innertube
+import com.ecoute.innertube.YouTube
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
@@ -133,7 +133,7 @@ fun PlaylistItem(
 
 @Composable
 fun PlaylistItem(
-    playlist: Innertube.PlaylistItem,
+    playlist: YouTube.PlaylistItem,
     thumbnailSizePx: Int,
     thumbnailSizeDp: Dp,
     modifier: Modifier = Modifier,

@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.valentinilk.shimmer.shimmer
 import com.ecoute.compose.persist.PersistMapCleanup
 import com.ecoute.compose.persist.persist
-import com.ecoute.innertube.Innertube
+import com.ecoute.innertube.YouTube
 import com.ecoute.innertube.models.bodies.BrowseBody
 import com.ecoute.innertube.requests.albumPage
 import com.ecoute.compose.routing.RouteHandler
@@ -56,7 +56,7 @@ fun AlbumScreen(browseId: String) {
     }
 
     var album by persist<Album?>("album/$browseId/album")
-    var albumPage by persist<Innertube.PlaylistOrAlbumPage?>("album/$browseId/albumPage")
+    var albumPage by persist<YouTube.PlaylistOrAlbumPage?>("album/$browseId/albumPage")
 
     PersistMapCleanup(tagPrefix = "album/$browseId/")
 
@@ -69,7 +69,7 @@ fun AlbumScreen(browseId: String) {
 
                 if (albumPage == null && (currentAlbum?.timestamp == null || tabIndex == 1)) {
                     withContext(Dispatchers.IO) {
-                        Innertube.albumPage(BrowseBody(browseId = browseId))
+                        YouTube.albumPage(BrowseBody(browseId = browseId))
                             ?.onSuccess { currentAlbumPage ->
                                 albumPage = currentAlbumPage
 
@@ -90,7 +90,7 @@ fun AlbumScreen(browseId: String) {
                                     currentAlbumPage
                                         .songsPage
                                         ?.items
-                                        ?.map(Innertube.SongItem::asMediaItem)
+                                        ?.map(YouTube.SongItem::asMediaItem)
                                         ?.onEach(Database::insert)
                                         ?.mapIndexed { position, mediaItem ->
                                             SongAlbumMap(
@@ -207,7 +207,7 @@ fun AlbumScreen(browseId: String) {
                                 itemsPageProvider = albumPage?.let {
                                     ({
                                         Result.success(
-                                            Innertube.ItemsPage(
+                                            YouTube.ItemsPage(
                                                 items = albumPage?.otherVersions,
                                                 continuation = null
                                             )

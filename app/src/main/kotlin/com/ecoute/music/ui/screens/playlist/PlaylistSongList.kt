@@ -26,7 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.valentinilk.shimmer.shimmer
 import com.ecoute.compose.persist.persist
-import com.ecoute.innertube.Innertube
+import com.ecoute.innertube.YouTube
 import com.ecoute.innertube.models.bodies.BrowseBody
 import com.ecoute.innertube.requests.playlistPage
 import com.ecoute.music.Database
@@ -73,13 +73,13 @@ fun PlaylistSongList(
     val context = LocalContext.current
     val menuState = LocalMenuState.current
 
-    var playlistPage by persist<Innertube.PlaylistOrAlbumPage?>("playlist/$browseId/playlistPage")
+    var playlistPage by persist<YouTube.PlaylistOrAlbumPage?>("playlist/$browseId/playlistPage")
 
     LaunchedEffect(Unit) {
         if (playlistPage != null && playlistPage?.songsPage?.continuation == null) return@LaunchedEffect
 
         playlistPage = withContext(Dispatchers.IO) {
-            Innertube.playlistPage(BrowseBody(browseId = browseId))?.completed()?.getOrNull()
+            YouTube.playlistPage(BrowseBody(browseId = browseId))?.completed()?.getOrNull()
         }
     }
 
@@ -101,7 +101,7 @@ fun PlaylistSongList(
                         val playlistId = Database.insert(Playlist(name = text, browseId = browseId))
 
                         playlistPage?.songsPage?.items
-                            ?.map(Innertube.SongItem::asMediaItem)
+                            ?.map(YouTube.SongItem::asMediaItem)
                             ?.onEach(Database::insert)
                             ?.mapIndexed { index, mediaItem ->
                                 SongPlaylistMap(
@@ -128,7 +128,7 @@ fun PlaylistSongList(
                     text = "Enqueue",
                     enabled = playlistPage?.songsPage?.items?.isNotEmpty() == true,
                     onClick = {
-                        playlistPage?.songsPage?.items?.map(Innertube.SongItem::asMediaItem)?.let { mediaItems ->
+                        playlistPage?.songsPage?.items?.map(YouTube.SongItem::asMediaItem)?.let { mediaItems ->
                             binder?.player?.enqueue(mediaItems)
                         }
                     }
@@ -204,7 +204,7 @@ fun PlaylistSongList(
                                     }
                                 },
                                 onClick = {
-                                    playlistPage?.songsPage?.items?.map(Innertube.SongItem::asMediaItem)?.let { mediaItems ->
+                                    playlistPage?.songsPage?.items?.map(YouTube.SongItem::asMediaItem)?.let { mediaItems ->
                                         binder?.stopRadio()
                                         binder?.player?.forcePlayAtIndex(mediaItems, index)
                                     }
@@ -235,7 +235,7 @@ fun PlaylistSongList(
                         if (songs.isNotEmpty()) {
                             binder?.stopRadio()
                             binder?.player?.forcePlayFromBeginning(
-                                songs.shuffled().map(Innertube.SongItem::asMediaItem)
+                                songs.shuffled().map(YouTube.SongItem::asMediaItem)
                             )
                         }
                     }

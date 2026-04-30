@@ -25,11 +25,11 @@ import com.ecoute.music.utils.color
 import com.ecoute.music.utils.medium
 import com.ecoute.music.utils.secondary
 import com.ecoute.music.utils.semiBold
-import com.ecoute.innertube.Innertube
+import com.ecoute.innertube.YouTube
 
 @Composable
 fun VideoItem(
-    video: Innertube.VideoItem,
+    video: YouTube.VideoItem,
     thumbnailHeightDp: Dp,
     thumbnailWidthDp: Dp,
     modifier: Modifier = Modifier

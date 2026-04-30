@@ -22,7 +22,7 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.ecoute.compose.persist.persist
-import com.ecoute.innertube.Innertube
+import com.ecoute.innertube.YouTube
 import com.ecoute.innertube.utils.plus
 import com.ecoute.music.LocalPlayerAwareWindowInsets
 import com.ecoute.music.ui.components.ShimmerHost
@@ -35,7 +35,7 @@ import kotlinx.coroutines.withContext
 
 @ExperimentalAnimationApi
 @Composable
-inline fun <T : Innertube.Item> ItemsPage(
+inline fun <T : YouTube.Item> ItemsPage(
     tag: String,
     crossinline headerContent: @Composable (textButton: (@Composable () -> Unit)?) -> Unit,
     crossinline itemContent: @Composable LazyItemScope.(T) -> Unit,
@@ -44,7 +44,7 @@ inline fun <T : Innertube.Item> ItemsPage(
     initialPlaceholderCount: Int = 8,
     continuationPlaceholderCount: Int = 3,
     emptyItemsText: String = "No items found",
-    noinline itemsPageProvider: (suspend (String?) -> Result<Innertube.ItemsPage<T>?>?)? = null,
+    noinline itemsPageProvider: (suspend (String?) -> Result<YouTube.ItemsPage<T>?>?)? = null,
 ) {
     val (_, typography) = LocalAppearance.current
 
@@ -52,7 +52,7 @@ inline fun <T : Innertube.Item> ItemsPage(
 
     val lazyListState = rememberLazyListState()
 
-    var itemsPage by persist<Innertube.ItemsPage<T>?>(tag)
+    var itemsPage by persist<YouTube.ItemsPage<T>?>(tag)
 
     LaunchedEffect(lazyListState, updatedItemsPageProvider) {
         val currentItemsPageProvider = updatedItemsPageProvider ?: return@LaunchedEffect
@@ -66,7 +66,7 @@ inline fun <T : Innertube.Item> ItemsPage(
                 }?.onSuccess {
                     if (it == null) {
                         if (itemsPage == null) {
-                            itemsPage = Innertube.ItemsPage(null, null)
+                            itemsPage = YouTube.ItemsPage(null, null)
                         }
                     } else {
                         itemsPage += it
@@ -92,7 +92,7 @@ inline fun <T : Innertube.Item> ItemsPage(
 
             items(
                 items = itemsPage?.items ?: emptyList(),
-                key = Innertube.Item::key,
+                key = YouTube.Item::key,
                 itemContent = itemContent
             )
 
