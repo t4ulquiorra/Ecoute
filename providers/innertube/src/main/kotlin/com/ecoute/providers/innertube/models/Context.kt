@@ -124,7 +124,7 @@ data class Context(
             client = Client(
                 clientId = 67,
                 clientName = "WEB_REMIX",
-                clientVersion = "1.20241121.01.00",
+                clientVersion = "1.20260213.01.00",
                 platform = "DESKTOP",
                 userAgent = UserAgents.DESKTOP,
                 referer = "https://music.youtube.com/",
@@ -136,11 +136,11 @@ data class Context(
             client = Client(
                 clientId = 5,
                 clientName = "IOS",
-                clientVersion = "20.03.02",
+                clientVersion = "21.03.1",
                 deviceMake = "Apple",
                 deviceModel = "iPhone16,2",
                 osName = "iPhone",
-                osVersion = "18.2.1.22C161",
+                osVersion = "18.2.22C152",
                 acceptHeader = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
                 userAgent = UserAgents.IOS,
                 apiKey = "AIzaSyB-63vPrdThhKuerbB2N_l7Kwwcxj6yUAc",
@@ -166,7 +166,7 @@ data class Context(
             client = Client(
                 clientId = 7,
                 clientName = "TVHTML5",
-                clientVersion = "7.20241201.18.00",
+                clientVersion = "7.20260213.00.00",
                 platform = "TV",
                 userAgent = UserAgents.TV,
                 referer = "https://www.youtube.com/",
@@ -189,9 +189,9 @@ val validCountryCodes =
 @Suppress("MaximumLineLength")
 object UserAgents {
     const val DESKTOP =
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.157 Safari/537.36"
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0"
     const val ANDROID_MUSIC =
         "com.google.android.apps.youtube.music/9.14.53 (Linux; U; Android 11) gzip"
-    const val IOS = "com.google.ios.youtube/20.03.02 (iPhone16,2; U; CPU iOS 18_2_1 like Mac OS X;)"
+    const val IOS = "com.google.ios.youtube/21.03.1 (iPhone16,2; U; CPU iOS 18_2 like Mac OS X;)"
     const val TV = "Mozilla/5.0 (ChromiumStylePlatform) Cobalt/Version"
 }
