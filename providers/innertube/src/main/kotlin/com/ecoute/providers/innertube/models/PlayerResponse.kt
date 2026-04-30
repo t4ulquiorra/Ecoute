@@ -43,7 +43,7 @@ data class PlayerResponse(
     ) {
         val highestQualityFormat: AdaptiveFormat?
             get() = adaptiveFormats
-                ?.filter { it.url != null || it.signatureCipher != null }
+                ?.filter { it.url != null && it.signatureCipher == null }
                 ?.filter { it.mimeType.startsWith("audio/") }
                 ?.let { formats ->
                     formats.findLast { it.itag == 251 || it.itag == 140 }

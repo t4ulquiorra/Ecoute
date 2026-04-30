@@ -1337,7 +1337,6 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
             chunkLength: Long? = DEFAULT_CHUNK_LENGTH,
             findMediaItem: suspend (videoId: String) -> MediaItem? = { null },
             uriCache: UriCache<String, Long?> = UriCache()
-            urlExpiry: HashMap<String, Long> = HashMap(),
         ): DataSource.Factory = ResolvingDataSource.Factory(
             ConditionalCacheDataSourceFactory(
                 cacheDataSourceFactory = cache.readOnlyWhen { PlayerPreferences.pauseCache }.asDataSource,
@@ -1366,9 +1365,7 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
                     )
                     )
             ) dataSpec
-            else uriCache[mediaId]?.takeIf {
-                urlExpiry[mediaId]?.let { exp -> System.currentTimeMillis() / 1000 < exp } != false
-            }?.let { cachedUri ->
+            else uriCache[mediaId]?.let { cachedUri ->
                 dataSpec
                     .withUri(cachedUri.uri)
                     .subrange(dataSpec.uriPositionOffset, chunkLength ?: DEFAULT_CHUNK_LENGTH)
@@ -1378,27 +1375,18 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
                 }?.getOrNull()
                 val youtubeFormat = body?.streamingData?.highestQualityFormat
 
-                val cipher = youtubeFormat?.signatureCipher
-                val directUrl = if (youtubeFormat?.url != null) {
-                    youtubeFormat.url
-                } else if (cipher != null) {
-                    kotlinx.coroutines.runBlocking(kotlinx.coroutines.Dispatchers.Main) {
-                        com.ecoute.music.utils.cipher.CipherDeobfuscator.deobfuscateStreamUrl(cipher, mediaId)
-                    }
-                } else null
-                if (directUrl == null) throw UnplayableException()
-
-                val transformedUrl = kotlinx.coroutines.runBlocking(kotlinx.coroutines.Dispatchers.Main) {
-                    com.ecoute.music.utils.cipher.CipherDeobfuscator.transformNParamInUrl(directUrl)
-                }
-
+                // Use NewPipe Extractor for reliable stream resolution.
+                // It handles n-param decryption, cipher, and all YouTube obfuscation natively.
+                java.io.File(context.filesDir, "url_debug.txt").writeText("FORMAT:" + youtubeFormat?.toString().orEmpty().take(300))
+                val directUrl = youtubeFormat?.url?.takeIf { it.isNotBlank() }
+                    ?: body?.streamingData?.adaptiveFormats
+                        ?.filter { it.mimeType?.startsWith("audio/") == true }
+                        ?.maxByOrNull { it.bitrate ?: 0L }
+                        ?.url?.takeIf { it.isNotBlank() }
+                    ?: throw UnplayableException()
+                val transformedUrl = kotlinx.coroutines.runBlocking(kotlinx.coroutines.Dispatchers.Main) { com.ecoute.music.utils.cipher.CipherDeobfuscator.transformNParamInUrl(directUrl) }
+                java.io.File(context.filesDir, "url_debug.txt").writeText("SAME:" + (directUrl == transformedUrl).toString() + "\nORIG:" + directUrl.take(200) + "\nTRANS:" + transformedUrl.take(200))
                 val (uri, contentLength) = Pair(transformedUrl.toUri(), youtubeFormat?.contentLength)
-
-                // Store expiry from YouTube response or parse from URL
-                val expireTimestamp = body?.streamingData?.expiresInSeconds
-                    ?.let { System.currentTimeMillis() / 1000 + it }
-                    ?: Regex("expire=([0-9]+)").find(transformedUrl)?.groupValues?.get(1)?.toLongOrNull()
-                if (expireTimestamp != null) urlExpiry[mediaId] = expireTimestamp
 
                 val mediaItem = runCatching {
                     runBlocking(Dispatchers.IO) { findMediaItem(mediaId) }
@@ -1442,7 +1430,6 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
 
                 dataSpec
                     .withUri(uri)
-                    .subrange(dataSpec.uriPositionOffset, chunkLength ?: DEFAULT_CHUNK_LENGTH)
             }
         }.handleUnknownErrors {
             uriCache.clear()
