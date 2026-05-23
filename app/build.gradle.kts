@@ -204,3 +204,4 @@ dependencies {
     detektPlugins(libs.detekt.compose)
     detektPlugins(libs.detekt.formatting)
 }
+    implementation(projects.providers.dare)

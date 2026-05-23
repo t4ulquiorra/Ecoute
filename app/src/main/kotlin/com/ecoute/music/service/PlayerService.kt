@@ -124,6 +124,7 @@ import com.ecoute.providers.innertube.models.NavigationEndpoint
 import com.ecoute.providers.innertube.models.bodies.PlayerBody
 import com.ecoute.providers.innertube.models.bodies.SearchBody
 import com.ecoute.providers.innertube.requests.player
+import com.ecoute.providers.dare.StreamingHelper
 import com.ecoute.providers.innertube.requests.searchPage
 import com.ecoute.providers.innertube.utils.from
 import com.ecoute.providers.sponsorblock.SponsorBlock
@@ -1383,7 +1384,7 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
                         ?.filter { it.mimeType?.startsWith("audio/") == true }
                         ?.maxByOrNull { it.bitrate ?: 0L }
                         ?.url?.takeIf { it.isNotBlank() }
-                    ?: throw UnplayableException()
+                    ?: run { StreamingHelper.getPipedAudioUrl(mediaId) } ?: throw UnplayableException()
                 val clientName = body?.context?.client?.clientName ?: ""
                 val webClients = listOf("WEB", "WEB_REMIX", "WEB_CREATOR", "TVHTML5")
                 val transformedUrl = if (clientName in webClients) {
